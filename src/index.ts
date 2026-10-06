@@ -15,51 +15,69 @@ export default {
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+
 	<meta
 		name="viewport"
 		content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
 	>
 
-	<meta name="theme-color" content="#07110d">
+	<meta name="theme-color" content="#000000">
+
 	<meta
 		name="description"
 		content="FLYTRIPVISA — Visa, flights, hotels and international travel services."
 	>
 
-	<title>FLYTRIPVISA — Travel Portal</title>
+	<title>FLYTRIPVISA — AI Powered Travel Portal</title>
 
 	<style>
+
 		* {
 			box-sizing: border-box;
 			margin: 0;
 			padding: 0;
 		}
 
+		/* =========================================================
+		   DYNAMIC BLACK THEME
+		========================================================= */
+
 		:root {
-			--bg: #f4f7f5;
-			--surface: #ffffff;
-			--surface-2: #f0f4f2;
-			--text: #102019;
-			--muted: #708079;
+			--bg: #000000;
+			--surface: #080808;
+			--surface-2: #111111;
+
+			--text: #f5f5f5;
+			--muted: #8a8a8a;
+
 			--primary: #08b968;
-			--primary-dark: #078e51;
-			--border: #e1e9e5;
-			--shadow: 0 10px 35px rgba(16, 32, 25, .07);
+			--primary-dark: #08b968;
+
+			--border: #202020;
+
+			--shadow:
+				0 10px 35px rgba(0, 0, 0, .60);
+
 			--radius: 20px;
 		}
 
 		body.dark {
-			--bg: #06100c;
-			--surface: #0d1914;
-			--surface-2: #13231c;
-			--text: #f2faf6;
-			--muted: #8fa39a;
-			--border: #20332a;
-			--shadow: 0 12px 40px rgba(0,0,0,.25);
+			--bg: #000000;
+			--surface: #080808;
+			--surface-2: #111111;
+
+			--text: #f5f5f5;
+			--muted: #8a8a8a;
+
+			--border: #202020;
+
+			--shadow:
+				0 12px 40px rgba(0, 0, 0, .65);
 		}
 
 		html {
 			scroll-behavior: smooth;
+			background: #000000;
 		}
 
 		body {
@@ -72,12 +90,34 @@ export default {
 				Arial,
 				sans-serif;
 
-			background: var(--bg);
+			background: #000000;
+			background-color: var(--bg);
+
 			color: var(--text);
 
 			min-height: 100vh;
 
 			padding-bottom: 96px;
+
+			transition:
+				background-color .25s ease,
+				color .25s ease;
+		}
+
+		body::before {
+			content: "";
+			position: fixed;
+			inset: 0;
+
+			background:
+				radial-gradient(
+					circle at 50% -10%,
+					rgba(8, 185, 104, .035),
+					transparent 38%
+				);
+
+			pointer-events: none;
+			z-index: -1;
 		}
 
 		a {
@@ -109,23 +149,21 @@ export default {
 			top: 0;
 			z-index: 1000;
 
-			padding-top: env(safe-area-inset-top);
+			padding-top:
+				env(safe-area-inset-top);
 
 			background:
-				color-mix(
-					in srgb,
-					var(--bg) 86%,
-					transparent
-				);
+				rgba(0, 0, 0, .86);
 
 			backdrop-filter: blur(20px);
 			-webkit-backdrop-filter: blur(20px);
 
-			border-bottom: 1px solid var(--border);
+			border-bottom:
+				1px solid var(--border);
 		}
 
 		.header-inner {
-			height: 64px;
+			height: 44px;
 
 			display: flex;
 			align-items: center;
@@ -139,18 +177,18 @@ export default {
 		.brand {
 			display: flex;
 			align-items: center;
-			gap: 10px;
 
+			gap: 10px;
 			min-width: 0;
 		}
 
 		.brand-logo {
 			position: relative;
 
-			width: 39px;
-			height: 39px;
+			width: 30px;
+			height: 30px;
 
-			flex: 0 0 39px;
+			flex: 0 0 30px;
 
 			border-radius: 13px;
 
@@ -158,8 +196,7 @@ export default {
 			place-items: center;
 
 			color: white;
-
-			font-size: 19px;
+			font-size: 15px;
 
 			background:
 				linear-gradient(
@@ -169,7 +206,8 @@ export default {
 				);
 
 			box-shadow:
-				0 7px 18px rgba(8,185,104,.22);
+				0 7px 18px
+				rgba(8,185,104,.22);
 		}
 
 		.brand-logo::after {
@@ -187,7 +225,8 @@ export default {
 
 			background: #a8ffd1;
 
-			box-shadow: 0 0 9px #6affae;
+			box-shadow:
+				0 0 9px #6affae;
 		}
 
 		.brand-text {
@@ -216,25 +255,31 @@ export default {
 			white-space: nowrap;
 		}
 
-		/* HEADER ACTIONS */
+		/* =========================================================
+		   HEADER ACTIONS
+		========================================================= */
 
 		.header-actions {
 			display: flex;
 			align-items: center;
+
 			gap: 7px;
 		}
 
 		.header-btn {
-			width: 39px;
-			height: 39px;
+			width: 30px;
+			height: 30px;
 
 			border-radius: 12px;
 
-			border: 1px solid var(--border);
+			border:
+				1px solid var(--border);
 
-			background: var(--surface);
+			background:
+				var(--surface);
 
-			color: var(--text);
+			color:
+				var(--text);
 
 			display: grid;
 			place-items: center;
@@ -251,13 +296,126 @@ export default {
 		}
 
 		.header-profile {
-			background: var(--primary);
-			color: #03140c;
+			background:
+				var(--primary);
 
-			border-color: transparent;
+			color:
+				#03140c;
+
+			border-color:
+				transparent;
 
 			font-size: 15px;
 			font-weight: 900;
+		}
+
+		/* =========================================================
+		   HEADER NAV DROPDOWN
+		   SIZE OF EXISTING HEADER BUTTONS UNCHANGED
+		========================================================= */
+
+		.nav-menu-wrap {
+			position: relative;
+		}
+
+		.nav-dropdown {
+			position: absolute;
+
+			top: 39px;
+			right: 0;
+
+			width: 190px;
+
+			padding: 7px;
+
+			border-radius: 16px;
+
+			background:
+				rgba(8, 8, 8, .97);
+
+			border:
+				1px solid var(--border);
+
+			box-shadow:
+				0 18px 50px
+				rgba(0, 0, 0, .65);
+
+			backdrop-filter:
+				blur(20px);
+
+			-webkit-backdrop-filter:
+				blur(20px);
+
+			opacity: 0;
+			visibility: hidden;
+
+			transform:
+				translateY(-6px)
+				scale(.98);
+
+			transform-origin:
+				top right;
+
+			transition:
+				opacity .18s ease,
+				transform .18s ease,
+				visibility .18s ease;
+
+			z-index: 3000;
+		}
+
+		.nav-dropdown.open {
+			opacity: 1;
+			visibility: visible;
+
+			transform:
+				translateY(0)
+				scale(1);
+		}
+
+		.nav-dropdown a {
+			display: flex;
+
+			align-items: center;
+			gap: 10px;
+
+			padding: 10px 11px;
+
+			border-radius: 11px;
+
+			color: #d9d9d9;
+
+			font-size: 12px;
+			font-weight: 750;
+
+			transition:
+				background .15s ease,
+				color .15s ease;
+		}
+
+		.nav-dropdown a:hover,
+		.nav-dropdown a:active {
+			background:
+				rgba(8,185,104,.10);
+
+			color:
+				#39e994;
+		}
+
+		.nav-dropdown-icon {
+			width: 22px;
+			text-align: center;
+
+			font-size: 15px;
+		}
+
+		.nav-divider {
+			height: 1px;
+
+			margin: 5px 6px;
+
+			background:
+				var(--border);
 		}
 
 		/* =========================================================
@@ -270,10 +428,9 @@ export default {
 
 		.hero-box {
 			position: relative;
-
 			overflow: hidden;
 
-			border-radius: 28px;
+			border-radius: 25px;
 
 			padding: 27px 22px;
 
@@ -287,12 +444,16 @@ export default {
 				),
 				linear-gradient(
 					135deg,
-					#071a11,
-					#0b3423
+					#050505,
+					#071d13
 				);
 
+			border:
+				1px solid rgba(57,233,148,.10);
+
 			box-shadow:
-				0 20px 55px rgba(0,70,40,.20);
+				0 20px 55px
+				rgba(0,70,40,.20);
 		}
 
 		.hero-box::after {
@@ -307,11 +468,13 @@ export default {
 
 			opacity: .055;
 
-			transform: rotate(-15deg);
+			transform:
+				rotate(-15deg);
 		}
 
 		.badge {
 			display: inline-flex;
+
 			align-items: center;
 			gap: 7px;
 
@@ -319,9 +482,12 @@ export default {
 
 			border-radius: 999px;
 
-			background: rgba(255,255,255,.09);
+			background:
+				rgba(255,255,255,.09);
 
-			border: 1px solid rgba(255,255,255,.12);
+			border:
+				1px solid
+				rgba(255,255,255,.12);
 
 			font-size: 10px;
 			font-weight: 800;
@@ -337,14 +503,16 @@ export default {
 
 			background: #36ed92;
 
-			box-shadow: 0 0 10px #36ed92;
+			box-shadow:
+				0 0 10px #36ed92;
 		}
 
 		.hero h1 {
 			position: relative;
 			z-index: 1;
 
-			font-size: clamp(31px, 8vw, 58px);
+			font-size:
+				clamp(31px, 8vw, 58px);
 
 			line-height: 1.02;
 
@@ -366,7 +534,6 @@ export default {
 			color: #b8cdc2;
 
 			font-size: 13px;
-
 			line-height: 1.7;
 
 			margin-bottom: 20px;
@@ -377,6 +544,7 @@ export default {
 			z-index: 2;
 
 			display: flex;
+
 			flex-wrap: wrap;
 
 			gap: 8px;
@@ -390,6 +558,7 @@ export default {
 			padding: 13px 16px;
 
 			display: inline-flex;
+
 			align-items: center;
 			justify-content: center;
 
@@ -398,7 +567,8 @@ export default {
 			font-size: 12px;
 			font-weight: 850;
 
-			transition: transform .18s ease;
+			transition:
+				transform .18s ease;
 		}
 
 		.btn:active {
@@ -406,15 +576,22 @@ export default {
 		}
 
 		.btn-primary {
-			background: var(--primary);
-			color: #03150c;
+			background:
+				var(--primary);
+
+			color:
+				#03150c;
 		}
 
 		.btn-light {
-			background: rgba(255,255,255,.09);
+			background:
+				rgba(255,255,255,.09);
+
 			color: white;
 
-			border: 1px solid rgba(255,255,255,.14);
+			border:
+				1px solid
+				rgba(255,255,255,.14);
 		}
 
 		/* =========================================================
@@ -426,13 +603,16 @@ export default {
 
 			padding: 16px;
 
-			border-radius: 19px;
+			border-radius: 15px;
 
-			background: var(--surface);
+			background:
+				var(--surface);
 
-			border: 1px solid var(--border);
+			border:
+				1px solid var(--border);
 
-			box-shadow: var(--shadow);
+			box-shadow:
+				var(--shadow);
 		}
 
 		.search-title {
@@ -455,17 +635,21 @@ export default {
 
 			border-radius: 12px;
 
-			border: 1px solid var(--border);
+			border:
+				1px solid var(--border);
 
-			background: var(--surface-2);
+			background:
+				var(--surface-2);
 
-			color: var(--text);
+			color:
+				var(--text);
 
 			outline: none;
 		}
 
 		.search-input:focus {
-			border-color: var(--primary);
+			border-color:
+				var(--primary);
 		}
 
 		.search-button {
@@ -475,9 +659,11 @@ export default {
 
 			border-radius: 12px;
 
-			background: var(--primary);
+			background:
+				var(--primary);
 
-			color: #03150c;
+			color:
+				#03150c;
 
 			font-size: 19px;
 		}
@@ -492,6 +678,7 @@ export default {
 
 		.section-head {
 			display: flex;
+
 			align-items: end;
 			justify-content: space-between;
 
@@ -500,24 +687,30 @@ export default {
 
 		.section-head h2 {
 			font-size: 19px;
+
 			letter-spacing: -.5px;
 		}
 
 		.section-head p {
-			color: var(--muted);
+			color:
+				var(--muted);
+
 			font-size: 10px;
+
 			margin-top: 4px;
 		}
 
 		.view-all {
-			color: var(--primary-dark);
+			color:
+				var(--primary);
 
 			font-size: 11px;
 			font-weight: 850;
 		}
 
 		body.dark .view-all {
-			color: #3de296;
+			color:
+				#3de296;
 		}
 
 		/* =========================================================
@@ -538,14 +731,18 @@ export default {
 
 			border-radius: 18px;
 
-			background: var(--surface);
+			background:
+				var(--surface);
 
-			border: 1px solid var(--border);
+			border:
+				1px solid var(--border);
 
 			box-shadow:
-				0 5px 20px rgba(0,0,0,.035);
+				0 5px 20px
+				rgba(0,0,0,.35);
 
-			transition: transform .18s ease;
+			transition:
+				transform .18s ease;
 		}
 
 		.service:active {
@@ -561,7 +758,8 @@ export default {
 
 			border-radius: 12px;
 
-			background: rgba(8,185,104,.10);
+			background:
+				rgba(8,185,104,.10);
 
 			font-size: 19px;
 
@@ -570,14 +768,15 @@ export default {
 
 		.service h3 {
 			font-size: 13px;
+
 			margin-bottom: 4px;
 		}
 
 		.service p {
-			color: var(--muted);
+			color:
+				var(--muted);
 
 			font-size: 10px;
-
 			line-height: 1.5;
 		}
 
@@ -606,6 +805,7 @@ export default {
 			padding: 15px;
 
 			display: flex;
+
 			align-items: flex-end;
 
 			color: white;
@@ -613,11 +813,16 @@ export default {
 			background:
 				linear-gradient(
 					135deg,
-					#173b2a,
-					#081710
+					#101f18,
+					#030705
 				);
 
-			box-shadow: var(--shadow);
+			border:
+				1px solid
+				rgba(255,255,255,.04);
+
+			box-shadow:
+				var(--shadow);
 		}
 
 		.destination::before {
@@ -629,7 +834,7 @@ export default {
 			background:
 				radial-gradient(
 					circle at 80% 20%,
-					rgba(50,230,145,.28),
+					rgba(50,230,145,.20),
 					transparent 35%
 				);
 		}
@@ -650,11 +855,14 @@ export default {
 
 		.destination h3 {
 			font-size: 16px;
+
 			margin-bottom: 3px;
 		}
 
 		.destination p {
-			color: #b9cec3;
+			color:
+				#b9cec3;
+
 			font-size: 9px;
 		}
 
@@ -667,11 +875,14 @@ export default {
 
 			border-radius: 20px;
 
-			background: var(--surface);
+			background:
+				var(--surface);
 
-			border: 1px solid var(--border);
+			border:
+				1px solid var(--border);
 
-			box-shadow: var(--shadow);
+			box-shadow:
+				var(--shadow);
 		}
 
 		.form-grid {
@@ -685,7 +896,8 @@ export default {
 			font-size: 10px;
 			font-weight: 800;
 
-			color: var(--muted);
+			color:
+				var(--muted);
 
 			margin-bottom: 6px;
 		}
@@ -698,26 +910,32 @@ export default {
 
 			border-radius: 11px;
 
-			border: 1px solid var(--border);
+			border:
+				1px solid var(--border);
 
-			background: var(--surface-2);
+			background:
+				var(--surface-2);
 
-			color: var(--text);
+			color:
+				var(--text);
 
 			outline: none;
 		}
 
 		.field input:focus,
 		.field select:focus {
-			border-color: var(--primary);
+			border-color:
+				var(--primary);
 		}
 
 		.form-submit {
 			width: 100%;
 
-			background: var(--primary);
+			background:
+				var(--primary);
 
-			color: #03150c;
+			color:
+				#03150c;
 		}
 
 		/* =========================================================
@@ -742,21 +960,25 @@ export default {
 
 			border-radius: 15px;
 
-			background: var(--surface);
+			background:
+				var(--surface);
 
-			border: 1px solid var(--border);
+			border:
+				1px solid var(--border);
 		}
 
 		.stat strong {
 			display: block;
 
-			color: var(--primary);
+			color:
+				var(--primary);
 
 			font-size: 18px;
 		}
 
 		.stat span {
-			color: var(--muted);
+			color:
+				var(--muted);
 
 			font-size: 8px;
 		}
@@ -770,13 +992,18 @@ export default {
 
 			padding: 24px 0 16px;
 
-			border-top: 1px solid var(--border);
+			border-top:
+				1px solid var(--border);
 
 			text-align: center;
 
-			color: var(--muted);
+			color:
+				var(--muted);
 
 			font-size: 10px;
+
+			background:
+				#000000;
 		}
 
 		/* =========================================================
@@ -793,16 +1020,20 @@ export default {
 			bottom: 0;
 
 			padding:
-				0 12px
-				calc(10px + env(safe-area-inset-bottom));
+				0 8px
+				calc(
+					10px +
+					env(safe-area-inset-bottom)
+				);
 
 			pointer-events: none;
 		}
 
 		.bottom-nav {
-			width: min(100%, 520px);
+			width:
+				min(100%, 420px);
 
-			height: 66px;
+			height: 50px;
 
 			margin: auto;
 
@@ -818,19 +1049,20 @@ export default {
 			border-radius: 22px;
 
 			background:
-				color-mix(
-					in srgb,
-					var(--surface) 94%,
-					transparent
-				);
+				rgba(8,8,8,.94);
 
-			border: 1px solid var(--border);
+			border:
+				1px solid var(--border);
 
 			box-shadow:
-				0 15px 45px rgba(0,0,0,.15);
+				0 15px 45px
+				rgba(0,0,0,.75);
 
-			backdrop-filter: blur(22px);
-			-webkit-backdrop-filter: blur(22px);
+			backdrop-filter:
+				blur(22px);
+
+			-webkit-backdrop-filter:
+				blur(22px);
 
 			pointer-events: auto;
 		}
@@ -844,20 +1076,19 @@ export default {
 
 			border-radius: 17px;
 
-			color: var(--muted);
+			color:
+				var(--muted);
 
 			display: flex;
 
 			flex-direction: column;
 
 			align-items: center;
-
 			justify-content: center;
 
 			gap: 3px;
 
 			font-size: 9px;
-
 			font-weight: 800;
 
 			transition:
@@ -872,20 +1103,15 @@ export default {
 
 		.bottom-icon {
 			font-size: 19px;
-
 			line-height: 1;
 		}
 
 		.bottom-item.active {
-			color: var(--primary-dark);
+			color:
+				#39e994;
 
 			background:
-				rgba(8,185,104,.10);
-		}
-
-		body.dark .bottom-item.active {
-			color: #39e994;
-			background: rgba(57,233,148,.09);
+				rgba(57,233,148,.09);
 		}
 
 		.bottom-item.active::after {
@@ -900,7 +1126,8 @@ export default {
 
 			border-radius: 50%;
 
-			background: currentColor;
+			background:
+				currentColor;
 		}
 
 		/* =========================================================
@@ -926,7 +1153,12 @@ export default {
 
 			border-radius: 12px;
 
-			background: #102019;
+			background:
+				#111111;
+
+			border:
+				1px solid
+				#242424;
 
 			color: white;
 
@@ -936,7 +1168,8 @@ export default {
 			white-space: nowrap;
 
 			box-shadow:
-				0 10px 30px rgba(0,0,0,.25);
+				0 10px 30px
+				rgba(0,0,0,.65);
 
 			transition: .25s ease;
 		}
@@ -959,7 +1192,8 @@ export default {
 			}
 
 			.container {
-				width: min(92%, 1120px);
+				width:
+					min(92%, 1120px);
 			}
 
 			.header-inner {
@@ -1003,6 +1237,7 @@ export default {
 				padding-bottom: 35px;
 			}
 		}
+
 	</style>
 </head>
 
@@ -1038,13 +1273,90 @@ export default {
 
 			<div class="header-actions">
 
+				<!-- NAV DROPDOWN -->
+
+				<div class="nav-menu-wrap">
+
+					<button
+						class="header-btn"
+						id="navBtn"
+						aria-label="Navigation menu"
+						aria-expanded="false"
+					>
+						☰
+					</button>
+
+					<div
+						class="nav-dropdown"
+						id="navDropdown"
+					>
+
+						<a href="#home">
+							<span class="nav-dropdown-icon">
+								⌂
+							</span>
+							Home
+						</a>
+
+						<a href="#services">
+							<span class="nav-dropdown-icon">
+								▦
+							</span>
+							Services
+						</a>
+
+						<a href="#visa">
+							<span class="nav-dropdown-icon">
+								🛂
+							</span>
+							Visa
+						</a>
+
+						<a href="#flights">
+							<span class="nav-dropdown-icon">
+								✈️
+							</span>
+							Flights
+						</a>
+
+						<a href="#hotels">
+							<span class="nav-dropdown-icon">
+								🏨
+							</span>
+							Hotels
+						</a>
+
+						<a href="#business">
+							<span class="nav-dropdown-icon">
+								💼
+							</span>
+							Business
+						</a>
+
+						<div class="nav-divider"></div>
+
+						<a href="#footer">
+							<span class="nav-dropdown-icon">
+								ℹ️
+							</span>
+							About FLYTRIPVISA
+						</a>
+
+					</div>
+
+				</div>
+
+				<!-- THEME -->
+
 				<button
 					class="header-btn"
 					id="themeBtn"
 					aria-label="Change theme"
 				>
-					☾
+					☀
 				</button>
+
+				<!-- PROFILE -->
 
 				<button
 					class="header-btn header-profile"
@@ -1060,8 +1372,7 @@ export default {
 
 	</header>
 
-
-	<main>
+	<main id="home">
 
 		<div class="container">
 
@@ -1072,8 +1383,11 @@ export default {
 				<div class="hero-box">
 
 					<div class="badge">
+
 						<span class="badge-dot"></span>
+
 						TRAVEL ASSISTANCE ONLINE
+
 					</div>
 
 					<h1>
@@ -1109,7 +1423,6 @@ export default {
 
 			</section>
 
-
 			<!-- SEARCH -->
 
 			<div class="search-card">
@@ -1139,7 +1452,6 @@ export default {
 
 			</div>
 
-
 			<!-- SERVICES -->
 
 			<section id="services">
@@ -1147,11 +1459,15 @@ export default {
 				<div class="section-head">
 
 					<div>
-						<h2>Our Services</h2>
+
+						<h2>
+							Our Services
+						</h2>
 
 						<p>
 							Everything you need for your journey
 						</p>
+
 					</div>
 
 				</div>
@@ -1164,7 +1480,9 @@ export default {
 							🛂
 						</div>
 
-						<h3>Visa Services</h3>
+						<h3>
+							Visa Services
+						</h3>
 
 						<p>
 							Visa assistance for destinations worldwide.
@@ -1172,14 +1490,15 @@ export default {
 
 					</a>
 
-
 					<a href="#flights" class="service">
 
 						<div class="service-icon">
 							✈️
 						</div>
 
-						<h3>Flight Booking</h3>
+						<h3>
+							Flight Booking
+						</h3>
 
 						<p>
 							Find flights and plan your next journey.
@@ -1187,14 +1506,15 @@ export default {
 
 					</a>
 
-
 					<a href="#hotels" class="service">
 
 						<div class="service-icon">
 							🏨
 						</div>
 
-						<h3>Hotels</h3>
+						<h3>
+							Hotels
+						</h3>
 
 						<p>
 							Comfortable stays at your destination.
@@ -1202,14 +1522,15 @@ export default {
 
 					</a>
 
-
 					<a href="#business" class="service">
 
 						<div class="service-icon">
 							💼
 						</div>
 
-						<h3>Business Setup</h3>
+						<h3>
+							Business Setup
+						</h3>
 
 						<p>
 							Business and company setup assistance.
@@ -1220,7 +1541,6 @@ export default {
 				</div>
 
 			</section>
-
 
 			<!-- DESTINATIONS -->
 
@@ -1249,84 +1569,103 @@ export default {
 
 				</div>
 
-
 				<div class="destinations">
 
 					<a
 						class="destination"
 						href="#visa"
 					>
-						<span class="flag">🇨🇳</span>
+
+						<span class="flag">
+							🇨🇳
+						</span>
 
 						<div class="destination-content">
 
-							<h3>China</h3>
+							<h3>
+								China
+							</h3>
 
 							<p>
 								Visa assistance
 							</p>
 
 						</div>
-					</a>
 
+					</a>
 
 					<a
 						class="destination"
 						href="#visa"
 					>
-						<span class="flag">🇯🇵</span>
+
+						<span class="flag">
+							🇯🇵
+						</span>
 
 						<div class="destination-content">
 
-							<h3>Japan</h3>
+							<h3>
+								Japan
+							</h3>
 
 							<p>
 								Explore Japan
 							</p>
 
 						</div>
-					</a>
 
+					</a>
 
 					<a
 						class="destination"
 						href="#visa"
 					>
-						<span class="flag">🇦🇪</span>
+
+						<span class="flag">
+							🇦🇪
+						</span>
 
 						<div class="destination-content">
 
-							<h3>UAE</h3>
+							<h3>
+								UAE
+							</h3>
 
 							<p>
 								Dubai & Abu Dhabi
 							</p>
 
 						</div>
-					</a>
 
+					</a>
 
 					<a
 						class="destination"
 						href="#visa"
 					>
-						<span class="flag">🇪🇺</span>
+
+						<span class="flag">
+							🇪🇺
+						</span>
 
 						<div class="destination-content">
 
-							<h3>Europe</h3>
+							<h3>
+								Europe
+							</h3>
 
 							<p>
 								Schengen assistance
 							</p>
 
 						</div>
+
 					</a>
 
 				</div>
 
 			</section>
-
 
 			<!-- VISA -->
 
@@ -1347,7 +1686,6 @@ export default {
 					</div>
 
 				</div>
-
 
 				<div class="form-card">
 
@@ -1382,7 +1720,6 @@ export default {
 
 						</div>
 
-
 						<div class="field">
 
 							<label>
@@ -1397,7 +1734,6 @@ export default {
 
 						</div>
 
-
 						<div class="field">
 
 							<label>
@@ -1410,7 +1746,6 @@ export default {
 							>
 
 						</div>
-
 
 						<button
 							class="btn form-submit"
@@ -1425,7 +1760,6 @@ export default {
 
 			</section>
 
-
 			<!-- FLIGHTS -->
 
 			<section id="flights">
@@ -1434,7 +1768,9 @@ export default {
 
 					<div>
 
-						<h2>✈️ Flights</h2>
+						<h2>
+							✈️ Flights
+						</h2>
 
 						<p>
 							Plan your route with ease
@@ -1443,7 +1779,6 @@ export default {
 					</div>
 
 				</div>
-
 
 				<div class="form-card">
 
@@ -1473,7 +1808,6 @@ export default {
 
 			</section>
 
-
 			<!-- HOTELS -->
 
 			<section id="hotels">
@@ -1482,7 +1816,9 @@ export default {
 
 					<div>
 
-						<h2>🏨 Hotels</h2>
+						<h2>
+							🏨 Hotels
+						</h2>
 
 						<p>
 							Find a comfortable place to stay
@@ -1491,7 +1827,6 @@ export default {
 					</div>
 
 				</div>
-
 
 				<div class="form-card">
 
@@ -1521,7 +1856,6 @@ export default {
 
 			</section>
 
-
 			<!-- BUSINESS -->
 
 			<section id="business">
@@ -1530,7 +1864,9 @@ export default {
 
 					<div>
 
-						<h2>💼 Business Setup</h2>
+						<h2>
+							💼 Business Setup
+						</h2>
 
 						<p>
 							Build your international business
@@ -1539,7 +1875,6 @@ export default {
 					</div>
 
 				</div>
-
 
 				<div class="form-card">
 
@@ -1569,24 +1904,44 @@ export default {
 
 			</section>
 
-
 			<!-- STATS -->
 
 			<div class="stats">
 
 				<div class="stat">
-					<strong>150+</strong>
-					<span>Countries</span>
+
+					<strong>
+						150+
+					</strong>
+
+					<span>
+						Countries
+					</span>
+
 				</div>
 
 				<div class="stat">
-					<strong>24/7</strong>
-					<span>Online Support</span>
+
+					<strong>
+						24/7
+					</strong>
+
+					<span>
+						Online Support
+					</span>
+
 				</div>
 
 				<div class="stat">
-					<strong>1</strong>
-					<span>Travel Portal</span>
+
+					<strong>
+						1
+					</strong>
+
+					<span>
+						Travel Portal
+					</span>
+
 				</div>
 
 			</div>
@@ -1595,10 +1950,11 @@ export default {
 
 	</main>
 
+	<!-- =========================================================
+	     FOOTER
+	========================================================= -->
 
-	<!-- FOOTER -->
-
-	<footer>
+	<footer id="footer">
 
 		<div class="container">
 
@@ -1619,7 +1975,6 @@ export default {
 
 	</footer>
 
-
 	<!-- =========================================================
 	     FLOATING BOTTOM APP NAVIGATION
 	========================================================= -->
@@ -1633,44 +1988,68 @@ export default {
 				class="bottom-item active"
 				data-section="home"
 			>
-				<span class="bottom-icon">⌂</span>
-				<span>Home</span>
-			</a>
 
+				<span class="bottom-icon">
+					⌂
+				</span>
+
+				<span>
+					Home
+				</span>
+
+			</a>
 
 			<a
 				href="#visa"
 				class="bottom-item"
 				data-section="visa"
 			>
-				<span class="bottom-icon">🛂</span>
-				<span>Visa</span>
-			</a>
 
+				<span class="bottom-icon">
+					🛂
+				</span>
+
+				<span>
+					Visa
+				</span>
+
+			</a>
 
 			<a
 				href="#flights"
 				class="bottom-item"
 				data-section="flights"
 			>
-				<span class="bottom-icon">✈️</span>
-				<span>Flights</span>
-			</a>
 
+				<span class="bottom-icon">
+					✈️
+				</span>
+
+				<span>
+					Flights
+				</span>
+
+			</a>
 
 			<a
 				href="#hotels"
 				class="bottom-item"
 				data-section="hotels"
 			>
-				<span class="bottom-icon">🏨</span>
-				<span>Hotels</span>
+
+				<span class="bottom-icon">
+					🏨
+				</span>
+
+				<span>
+					Hotels
+				</span>
+
 			</a>
 
 		</nav>
 
 	</div>
-
 
 	<!-- TOAST -->
 
@@ -1679,46 +2058,155 @@ export default {
 		id="toast"
 	></div>
 
-
 	<script>
 
 		/* =========================================================
-		   THEME
+		   DYNAMIC BLACK THEME
 		========================================================= */
 
 		const themeBtn =
 			document.getElementById("themeBtn");
+
+		/*
+		 * Black is the default theme.
+		 * Keep the user's preference if one exists.
+		 */
 
 		const savedTheme =
 			localStorage.getItem(
 				"flytripvisa-theme"
 			);
 
-		if (savedTheme === "dark") {
+		document.body.classList.add("dark");
 
-			document.body.classList.add("dark");
-
-			themeBtn.textContent = "☀";
-
+		if (savedTheme === "light") {
+			/*
+			 * Even light mode remains black-based.
+			 * This keeps the entire portal visually dark.
+			 */
+			document.body.classList.remove("dark");
 		}
 
-		themeBtn.addEventListener("click", () => {
+		themeBtn.textContent =
+			document.body.classList.contains("dark")
+				? "☀"
+				: "☾";
 
-			document.body.classList.toggle("dark");
+		themeBtn.addEventListener(
+			"click",
+			() => {
 
-			const dark =
-				document.body.classList.contains("dark");
+				document.body.classList.toggle(
+					"dark"
+				);
 
-			localStorage.setItem(
-				"flytripvisa-theme",
-				dark ? "dark" : "light"
+				const dark =
+					document.body.classList.contains(
+						"dark"
+					);
+
+				localStorage.setItem(
+					"flytripvisa-theme",
+					dark
+						? "dark"
+						: "light"
+				);
+
+				themeBtn.textContent =
+					dark
+						? "☀"
+						: "☾";
+
+			}
+		);
+
+		/* =========================================================
+		   NAV DROPDOWN
+		========================================================= */
+
+		const navBtn =
+			document.getElementById(
+				"navBtn"
 			);
 
-			themeBtn.textContent =
-				dark ? "☀" : "☾";
+		const navDropdown =
+			document.getElementById(
+				"navDropdown"
+			);
 
-		});
+		navBtn.addEventListener(
+			"click",
+			event => {
 
+				event.stopPropagation();
+
+				const opened =
+					navDropdown.classList.toggle(
+						"open"
+					);
+
+				navBtn.setAttribute(
+					"aria-expanded",
+					String(opened)
+				);
+
+			}
+		);
+
+		/*
+		 * Close dropdown when clicking outside.
+		 */
+
+		document.addEventListener(
+			"click",
+			event => {
+
+				if (
+					!navDropdown.contains(
+						event.target
+					) &&
+					event.target !== navBtn
+				) {
+
+					navDropdown.classList.remove(
+						"open"
+					);
+
+					navBtn.setAttribute(
+						"aria-expanded",
+						"false"
+					);
+
+				}
+
+			}
+		);
+
+		/*
+		 * Close dropdown after selecting a menu item.
+		 */
+
+		navDropdown
+			.querySelectorAll("a")
+			.forEach(link => {
+
+				link.addEventListener(
+					"click",
+					() => {
+
+						navDropdown.classList.remove(
+							"open"
+						);
+
+						navBtn.setAttribute(
+							"aria-expanded",
+							"false"
+						);
+
+					}
+				);
+
+			});
 
 		/* =========================================================
 		   TOAST
@@ -1727,20 +2215,29 @@ export default {
 		function showToast(message) {
 
 			const toast =
-				document.getElementById("toast");
+				document.getElementById(
+					"toast"
+				);
 
-			toast.textContent = message;
+			toast.textContent =
+				message;
 
-			toast.classList.add("show");
+			toast.classList.add(
+				"show"
+			);
 
-			setTimeout(() => {
+			setTimeout(
+				() => {
 
-				toast.classList.remove("show");
+					toast.classList.remove(
+						"show"
+					);
 
-			}, 2200);
+				},
+				2200
+			);
 
 		}
-
 
 		/* =========================================================
 		   PROFILE
@@ -1748,14 +2245,16 @@ export default {
 
 		document
 			.getElementById("profileBtn")
-			.addEventListener("click", () => {
+			.addEventListener(
+				"click",
+				() => {
 
-				showToast(
-					"Login & profile coming soon"
-				);
+					showToast(
+						"Login & profile coming soon"
+					);
 
-			});
-
+				}
+			);
 
 		/* =========================================================
 		   SEARCH
@@ -1768,37 +2267,44 @@ export default {
 
 		document
 			.getElementById("searchBtn")
-			.addEventListener("click", () => {
+			.addEventListener(
+				"click",
+				() => {
 
-				const value =
-					searchInput.value.trim();
+					const value =
+						searchInput.value.trim();
 
-				if (!value) {
+					if (!value) {
+
+						showToast(
+							"Enter a destination or service"
+						);
+
+						searchInput.focus();
+
+						return;
+					}
 
 					showToast(
-						"Enter a destination or service"
+						"Searching: " +
+						value
 					);
 
-					searchInput.focus();
-
-					return;
 				}
-
-				showToast(
-					"Searching: " + value
-				);
-
-			});
-
+			);
 
 		searchInput.addEventListener(
 			"keydown",
 			event => {
 
-				if (event.key === "Enter") {
+				if (
+					event.key === "Enter"
+				) {
 
 					document
-						.getElementById("searchBtn")
+						.getElementById(
+							"searchBtn"
+						)
 						.click();
 
 				}
@@ -1806,52 +2312,53 @@ export default {
 			}
 		);
 
-
 		/* =========================================================
 		   VISA CHECK
 		========================================================= */
 
 		document
 			.getElementById("checkVisa")
-			.addEventListener("click", () => {
+			.addEventListener(
+				"click",
+				() => {
 
-				const destination =
-					document.getElementById(
-						"destination"
-					).value;
+					const destination =
+						document.getElementById(
+							"destination"
+						).value;
 
-				const passport =
-					document.getElementById(
-						"passport"
-					).value.trim();
+					const passport =
+						document.getElementById(
+							"passport"
+						).value.trim();
 
-				if (!destination) {
+					if (!destination) {
+
+						showToast(
+							"Select your destination"
+						);
+
+						return;
+					}
+
+					if (!passport) {
+
+						showToast(
+							"Enter your passport country"
+						);
+
+						return;
+					}
 
 					showToast(
-						"Select your destination"
+						"Checking " +
+						destination +
+						" visa for " +
+						passport
 					);
 
-					return;
 				}
-
-				if (!passport) {
-
-					showToast(
-						"Enter your passport country"
-					);
-
-					return;
-				}
-
-				showToast(
-					"Checking " +
-					destination +
-					" visa for " +
-					passport
-				);
-
-			});
-
+			);
 
 		/* =========================================================
 		   BOTTOM NAV ACTIVE STATE
@@ -1862,56 +2369,68 @@ export default {
 				".bottom-item"
 			);
 
-		navItems.forEach(item => {
+		navItems.forEach(
+			item => {
 
-			item.addEventListener(
-				"click",
-				() => {
+				item.addEventListener(
+					"click",
+					() => {
 
-					navItems.forEach(
-						nav =>
-							nav.classList.remove(
-								"active"
-							)
-					);
+						navItems.forEach(
+							nav =>
+								nav.classList.remove(
+									"active"
+								)
+						);
 
-					item.classList.add("active");
+						item.classList.add(
+							"active"
+						);
 
-				}
-			);
+					}
+				);
 
-		});
-
+			}
+		);
 
 		/* =========================================================
 		   SCROLL BASED NAVIGATION
 		========================================================= */
 
 		const sections = [
+
 			{
 				id: "visa",
 				nav: "visa"
 			},
+
 			{
 				id: "flights",
 				nav: "flights"
 			},
+
 			{
 				id: "hotels",
 				nav: "hotels"
 			}
+
 		];
 
 		window.addEventListener(
 			"scroll",
 			() => {
 
-				let current = "home";
+				let current =
+					"home";
 
 				const position =
-					window.scrollY + 180;
+					window.scrollY +
+					180;
 
-				for (const section of sections) {
+				for (
+					const section
+					of sections
+				) {
 
 					const element =
 						document.getElementById(
@@ -1920,26 +2439,34 @@ export default {
 
 					if (
 						element &&
-						position >= element.offsetTop
+						position >=
+						element.offsetTop
 					) {
-						current = section.nav;
+
+						current =
+							section.nav;
+
 					}
 
 				}
 
-				navItems.forEach(item => {
+				navItems.forEach(
+					item => {
 
-					item.classList.toggle(
-						"active",
-						item.dataset.section === current
-					);
+						item.classList.toggle(
+							"active",
+							item.dataset.section ===
+							current
+						);
 
-				});
+					}
+				);
 
 			},
-			{ passive: true }
+			{
+				passive: true
+			}
 		);
-
 
 		/* =========================================================
 		   HOME LINK
@@ -1949,16 +2476,19 @@ export default {
 			.querySelector(
 				'.bottom-item[data-section="home"]'
 			)
-			.addEventListener("click", event => {
+			.addEventListener(
+				"click",
+				event => {
 
-				event.preventDefault();
+					event.preventDefault();
 
-				window.scrollTo({
-					top: 0,
-					behavior: "smooth"
-				});
+					window.scrollTo({
+						top: 0,
+						behavior: "smooth"
+					});
 
-			});
+				}
+			);
 
 	</script>
 
@@ -1967,8 +2497,11 @@ export default {
 
 		return new Response(html, {
 			headers: {
-				"content-type": "text/html; charset=UTF-8",
-				"cache-control": "public, max-age=60",
+				"content-type":
+					"text/html; charset=UTF-8",
+
+				"cache-control":
+					"public, max-age=60",
 			},
 		});
 	},
