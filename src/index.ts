@@ -36,34 +36,18 @@ export default {
 			box-sizing: border-box;
 			margin: 0;
 			padding: 0;
-		}
 
-		/* =========================================================
-		   DYNAMIC BLACK THEME
-		========================================================= */
-
-		:root {
-			--bg: #000000;
-			--surface: #080808;
-			--surface-2: #111111;
-
-			--text: #f5f5f5;
-			--muted: #8a8a8a;
-
-			--primary: #08b968;
-			--primary-dark: #08b968;
-
-			--border: #202020;
-
-			--shadow:
-				0 10px 35px rgba(0, 0, 0, .60);
-
-			--radius: 20px;
+			/* Disable browser tap highlight */
+			-webkit-tap-highlight-color: transparent;
+			-webkit-touch-callout: none;
 		}
 
 		html {
 			scroll-behavior: smooth;
 			background: #000000;
+
+			/* Disable tap highlight on the document */
+			-webkit-tap-highlight-color: transparent;
 		}
 
 		body {
@@ -88,6 +72,72 @@ export default {
 			transition:
 				background-color .25s ease,
 				color .25s ease;
+
+			/* Disable mobile tap highlight */
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		/* =========================================================
+		   REMOVE MOBILE BLUE TAP / FOCUS FLASH
+		========================================================= */
+
+		a,
+		button,
+		input,
+		select,
+		textarea,
+		[role="button"] {
+			-webkit-tap-highlight-color: transparent;
+			-webkit-touch-callout: none;
+		}
+
+		a:focus,
+		button:focus,
+		input:focus,
+		select:focus,
+		textarea:focus {
+			outline: none;
+		}
+
+		a:focus-visible,
+		button:focus-visible {
+			outline: none;
+			box-shadow: none;
+		}
+
+		button {
+			appearance: none;
+			-webkit-appearance: none;
+		}
+
+		input,
+		select,
+		textarea {
+			-webkit-appearance: none;
+			appearance: none;
+		}
+
+		/* =========================================================
+		   BLACK THEME
+		========================================================= */
+
+		:root {
+			--bg: #000000;
+			--surface: #080808;
+			--surface-2: #111111;
+
+			--text: #f5f5f5;
+			--muted: #8a8a8a;
+
+			--primary: #08b968;
+			--primary-dark: #08b968;
+
+			--border: #202020;
+
+			--shadow:
+				0 10px 35px rgba(0, 0, 0, .60);
+
+			--radius: 20px;
 		}
 
 		body::before {
@@ -280,6 +330,16 @@ export default {
 			transition:
 				transform .18s ease,
 				background .18s ease;
+
+			/* Prevent blue flash */
+			-webkit-tap-highlight-color: transparent;
+			outline: none;
+		}
+
+		.header-btn:focus,
+		.header-btn:focus-visible {
+			outline: none;
+			box-shadow: none;
 		}
 
 		.header-btn:active {
@@ -367,6 +427,15 @@ export default {
 			transition:
 				background .15s ease,
 				color .15s ease;
+
+			-webkit-tap-highlight-color: transparent;
+			outline: none;
+		}
+
+		.nav-dropdown a:focus,
+		.nav-dropdown a:focus-visible {
+			outline: none;
+			box-shadow: none;
 		}
 
 		.nav-dropdown a:hover,
@@ -545,6 +614,15 @@ export default {
 
 			transition:
 				transform .18s ease;
+
+			-webkit-tap-highlight-color: transparent;
+			outline: none;
+		}
+
+		.btn:focus,
+		.btn:focus-visible {
+			outline: none;
+			box-shadow: none;
 		}
 
 		.btn:active {
@@ -621,11 +699,16 @@ export default {
 				var(--text);
 
 			outline: none;
+
+			-webkit-tap-highlight-color: transparent;
 		}
 
 		.search-input:focus {
 			border-color:
 				var(--primary);
+
+			outline: none;
+			box-shadow: none;
 		}
 
 		.search-button {
@@ -642,6 +725,15 @@ export default {
 				#03150c;
 
 			font-size: 19px;
+
+			-webkit-tap-highlight-color: transparent;
+			outline: none;
+		}
+
+		.search-button:focus,
+		.search-button:focus-visible {
+			outline: none;
+			box-shadow: none;
 		}
 
 		/* =========================================================
@@ -714,6 +806,17 @@ export default {
 
 			transition:
 				transform .18s ease;
+
+			-webkit-tap-highlight-color: transparent;
+			outline: none;
+		}
+
+		.service:focus,
+		.service:focus-visible {
+			outline: none;
+			box-shadow:
+				0 5px 20px
+				rgba(0,0,0,.35);
 		}
 
 		.service:active {
@@ -794,6 +897,14 @@ export default {
 
 			box-shadow:
 				var(--shadow);
+
+			-webkit-tap-highlight-color: transparent;
+			outline: none;
+		}
+
+		.destination:focus,
+		.destination:focus-visible {
+			outline: none;
 		}
 
 		.destination::before {
@@ -891,12 +1002,17 @@ export default {
 				var(--text);
 
 			outline: none;
+
+			-webkit-tap-highlight-color: transparent;
 		}
 
 		.field input:focus,
 		.field select:focus {
 			border-color:
 				var(--primary);
+
+			outline: none;
+			box-shadow: none;
 		}
 
 		.form-submit {
@@ -1066,6 +1182,15 @@ export default {
 				background .2s ease,
 				color .2s ease,
 				transform .18s ease;
+
+			-webkit-tap-highlight-color: transparent;
+			outline: none;
+		}
+
+		.bottom-item:focus,
+		.bottom-item:focus-visible {
+			outline: none;
+			box-shadow: none;
 		}
 
 		.bottom-item:active {
@@ -1226,7 +1351,7 @@ export default {
 			<a href="#home" class="brand">
 
 				<div class="brand-logo">
-					✈
+					👽
 				</div>
 
 				<div class="brand-text">
@@ -1236,7 +1361,7 @@ export default {
 					</div>
 
 					<div class="brand-subtitle">
-						TRAVEL • VISA • FLIGHTS
+						AI POWERD APPS
 					</div>
 
 				</div>
@@ -1244,8 +1369,6 @@ export default {
 			</a>
 
 			<div class="header-actions">
-
-				<!-- ONLY HEADER BUTTON -->
 
 				<div class="nav-menu-wrap">
 
@@ -1335,8 +1458,6 @@ export default {
 
 		<div class="container">
 
-			<!-- HERO -->
-
 			<section class="hero">
 
 				<div class="hero-box">
@@ -1382,8 +1503,6 @@ export default {
 
 			</section>
 
-			<!-- SEARCH -->
-
 			<div class="search-card">
 
 				<div class="search-title">
@@ -1411,8 +1530,6 @@ export default {
 				</div>
 
 			</div>
-
-			<!-- SERVICES -->
 
 			<section id="services">
 
@@ -1501,8 +1618,6 @@ export default {
 				</div>
 
 			</section>
-
-			<!-- DESTINATIONS -->
 
 			<section>
 
@@ -1627,8 +1742,6 @@ export default {
 
 			</section>
 
-			<!-- VISA -->
-
 			<section id="visa">
 
 				<div class="section-head">
@@ -1721,8 +1834,6 @@ export default {
 
 			</section>
 
-			<!-- FLIGHTS -->
-
 			<section id="flights">
 
 				<div class="section-head">
@@ -1769,8 +1880,6 @@ export default {
 				</div>
 
 			</section>
-
-			<!-- HOTELS -->
 
 			<section id="hotels">
 
@@ -1819,8 +1928,6 @@ export default {
 
 			</section>
 
-			<!-- BUSINESS -->
-
 			<section id="business">
 
 				<div class="section-head">
@@ -1868,8 +1975,6 @@ export default {
 
 			</section>
 
-			<!-- STATS -->
-
 			<div class="stats">
 
 				<div class="stat">
@@ -1914,22 +2019,17 @@ export default {
 
 	</main>
 
-	<!-- =========================================================
-	     FOOTER
-	========================================================= -->
-
 	<footer id="footer">
 
 		<div class="container">
 
 			<strong style="color:var(--text);">
-				FLYTRIPVISA
+				FLYTRIPVISA - AI TRAVEL PORTAL
 			</strong>
 
 			<br><br>
 
-			© ${new Date().getFullYear()}
-			FLYTRIPVISA. All rights reserved.
+			© 2026 FLYTRIPVISA. All rights reserved.
 
 			<br>
 
@@ -1938,10 +2038,6 @@ export default {
 		</div>
 
 	</footer>
-
-	<!-- =========================================================
-	     FLOATING BOTTOM NAVIGATION
-	========================================================= -->
 
 	<div class="bottom-wrap">
 
@@ -2014,10 +2110,6 @@ export default {
 		</nav>
 
 	</div>
-
-	<!-- =========================================================
-	     TOAST
-	========================================================= -->
 
 	<div
 		class="toast"
@@ -2096,8 +2188,6 @@ export default {
 			}
 		);
 
-		/* Close menu outside */
-
 		document.addEventListener(
 			"click",
 			event => {
@@ -2128,8 +2218,6 @@ export default {
 			}
 		);
 
-		/* Close menu after navigation */
-
 		navDropdown
 			.querySelectorAll("a")
 			.forEach(link => {
@@ -2156,8 +2244,6 @@ export default {
 				);
 
 			});
-
-		/* Escape key */
 
 		document.addEventListener(
 			"keydown",
