@@ -15,1052 +15,2005 @@ export default {
 		const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-	<meta name="theme-color" content="#07110d">
-	<meta name="description" content="FLYTRIPVISA — Visa, flights, hotels and travel services in one place.">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-	<title>FLYTRIPVISA — Travel Portal</title>
-
-	<style>
-		* {
-			box-sizing: border-box;
-			margin: 0;
-			padding: 0;
-		}
-
-		:root {
-			--bg: #f5f7f6;
-			--surface: #ffffff;
-			--surface-2: #f0f4f2;
-			--text: #102019;
-			--muted: #68756f;
-			--primary: #08b968;
-			--primary-dark: #079653;
-			--border: #e3e9e6;
-			--shadow: 0 10px 35px rgba(16, 32, 25, .08);
-			--radius: 22px;
-		}
-
-		body.dark {
-			--bg: #07110d;
-			--surface: #0d1914;
-			--surface-2: #13231c;
-			--text: #f2faf6;
-			--muted: #91a29a;
-			--border: #20332a;
-			--shadow: 0 12px 40px rgba(0,0,0,.25);
-		}
-
-		html {
-			scroll-behavior: smooth;
-		}
-
-		body {
-			font-family:
-				Inter,
-				-apple-system,
-				BlinkMacSystemFont,
-				"Segoe UI",
-				Roboto,
-				Arial,
-				sans-serif;
-			background: var(--bg);
-			color: var(--text);
-			min-height: 100vh;
-			padding-bottom: 82px;
-		}
-
-		button,
-		input,
-		select {
-			font: inherit;
-		}
-
-		button {
-			cursor: pointer;
-		}
-
-		a {
-			color: inherit;
-			text-decoration: none;
-		}
-
-		.container {
-			width: min(100% - 28px, 1100px);
-			margin: auto;
-		}
-
-		/* HEADER */
-
-		header {
-			position: sticky;
-			top: 0;
-			z-index: 100;
-			background: color-mix(in srgb, var(--bg) 88%, transparent);
-			backdrop-filter: blur(18px);
-			border-bottom: 1px solid var(--border);
-		}
-
-		.nav {
-			height: 68px;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-		}
-
-		.brand {
-			display: flex;
-			align-items: center;
-			gap: 10px;
-			font-weight: 900;
-			letter-spacing: -.5px;
-		}
-
-		.logo {
-			width: 40px;
-			height: 40px;
-			border-radius: 13px;
-			display: grid;
-			place-items: center;
-			background: linear-gradient(135deg, #0bd477, #078f50);
-			color: white;
-			font-size: 21px;
-			box-shadow: 0 8px 20px rgba(8,185,104,.25);
-		}
-
-		.brand small {
-			display: block;
-			font-size: 9px;
-			letter-spacing: 1.8px;
-			color: var(--muted);
-			margin-top: 1px;
-		}
-
-		.nav-actions {
-			display: flex;
-			gap: 8px;
-		}
-
-		.icon-btn {
-			width: 42px;
-			height: 42px;
-			border-radius: 13px;
-			border: 1px solid var(--border);
-			background: var(--surface);
-			color: var(--text);
-			display: grid;
-			place-items: center;
-			font-size: 18px;
-		}
-
-		/* HERO */
-
-		.hero {
-			padding: 34px 0 22px;
-		}
-
-		.hero-box {
-			position: relative;
-			overflow: hidden;
-			border-radius: 30px;
-			padding: 30px 24px;
-			background:
-				radial-gradient(circle at 90% 10%, rgba(38,255,155,.22), transparent 35%),
-				linear-gradient(135deg, #071a11, #0b3423);
-			color: white;
-			box-shadow: 0 20px 55px rgba(0,70,40,.22);
-		}
-
-		.hero-box::after {
-			content: "✈";
-			position: absolute;
-			right: 8%;
-			bottom: -25px;
-			font-size: 120px;
-			opacity: .06;
-			transform: rotate(-15deg);
-		}
-
-		.badge {
-			display: inline-flex;
-			align-items: center;
-			gap: 7px;
-			padding: 7px 11px;
-			border-radius: 99px;
-			background: rgba(255,255,255,.1);
-			border: 1px solid rgba(255,255,255,.12);
-			font-size: 11px;
-			font-weight: 700;
-			margin-bottom: 16px;
-		}
-
-		.dot {
-			width: 7px;
-			height: 7px;
-			border-radius: 50%;
-			background: #31e68d;
-			box-shadow: 0 0 10px #31e68d;
-		}
-
-		.hero h1 {
-			font-size: clamp(30px, 8vw, 58px);
-			line-height: 1.02;
-			letter-spacing: -2px;
-			max-width: 680px;
-			margin-bottom: 13px;
-		}
-
-		.hero h1 span {
-			color: #35e78f;
-		}
-
-		.hero p {
-			color: #b9cec3;
-			font-size: 14px;
-			line-height: 1.7;
-			max-width: 580px;
-			margin-bottom: 22px;
-		}
-
-		.hero-actions {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 9px;
-		}
-
-		.btn {
-			border: 0;
-			border-radius: 13px;
-			padding: 13px 17px;
-			font-weight: 800;
-			font-size: 13px;
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			gap: 8px;
-			transition: .2s ease;
-		}
-
-		.btn:active {
-			transform: scale(.97);
-		}
-
-		.btn-primary {
-			background: var(--primary);
-			color: #03150c;
-		}
-
-		.btn-light {
-			background: rgba(255,255,255,.1);
-			color: white;
-			border: 1px solid rgba(255,255,255,.15);
-		}
-
-		/* SEARCH */
-
-		.search-card {
-			margin-top: -1px;
-			padding: 17px;
-			border: 1px solid var(--border);
-			background: var(--surface);
-			border-radius: 20px;
-			box-shadow: var(--shadow);
-		}
-
-		.search-title {
-			font-weight: 800;
-			font-size: 15px;
-			margin-bottom: 12px;
-		}
-
-		.search-row {
-			display: flex;
-			gap: 8px;
-		}
-
-		.search-input {
-			flex: 1;
-			min-width: 0;
-			border: 1px solid var(--border);
-			background: var(--surface-2);
-			color: var(--text);
-			border-radius: 13px;
-			padding: 13px 14px;
-			outline: none;
-		}
-
-		.search-input:focus {
-			border-color: var(--primary);
-		}
-
-		.search-button {
-			width: 48px;
-			border: 0;
-			border-radius: 13px;
-			background: var(--primary);
-			color: #03150c;
-			font-size: 18px;
-		}
-
-		/* SECTIONS */
-
-		section {
-			padding: 25px 0 5px;
-		}
-
-		.section-head {
-			display: flex;
-			align-items: end;
-			justify-content: space-between;
-			margin-bottom: 13px;
-		}
-
-		.section-head h2 {
-			font-size: 20px;
-			letter-spacing: -.5px;
-		}
-
-		.section-head p {
-			color: var(--muted);
-			font-size: 11px;
-			margin-top: 4px;
-		}
-
-		.view-all {
-			font-size: 12px;
-			color: var(--primary-dark);
-			font-weight: 800;
-		}
-
-		body.dark .view-all {
-			color: #39df91;
-		}
-
-		/* SERVICES */
-
-		.services {
-			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			gap: 10px;
-		}
-
-		.service {
-			padding: 17px;
-			background: var(--surface);
-			border: 1px solid var(--border);
-			border-radius: 18px;
-			box-shadow: 0 5px 20px rgba(0,0,0,.035);
-			transition: transform .2s ease;
-		}
-
-		.service:active {
-			transform: scale(.98);
-		}
-
-		.service-icon {
-			width: 42px;
-			height: 42px;
-			display: grid;
-			place-items: center;
-			border-radius: 13px;
-			background: rgba(8,185,104,.1);
-			font-size: 20px;
-			margin-bottom: 12px;
-		}
-
-		.service h3 {
-			font-size: 14px;
-			margin-bottom: 5px;
-		}
-
-		.service p {
-			color: var(--muted);
-			font-size: 11px;
-			line-height: 1.5;
-		}
-
-		/* DESTINATIONS */
-
-		.destinations {
-			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			gap: 10px;
-		}
-
-		.destination {
-			position: relative;
-			min-height: 145px;
-			border-radius: 19px;
-			overflow: hidden;
-			background: linear-gradient(135deg, #17362a, #0a1711);
-			display: flex;
-			align-items: flex-end;
-			padding: 15px;
-			color: white;
-			box-shadow: var(--shadow);
-		}
-
-		.destination::before {
-			content: "";
-			position: absolute;
-			inset: 0;
-			background: radial-gradient(circle at 80% 20%, rgba(45,225,145,.3), transparent 35%);
-		}
-
-		.destination .flag {
-			position: absolute;
-			right: 13px;
-			top: 13px;
-			font-size: 25px;
-		}
-
-		.destination-content {
-			position: relative;
-			z-index: 1;
-		}
-
-		.destination h3 {
-			font-size: 17px;
-			margin-bottom: 3px;
-		}
-
-		.destination p {
-			color: #b8cfc4;
-			font-size: 10px;
-		}
-
-		/* QUICK FORM */
-
-		.form-card {
-			background: var(--surface);
-			border: 1px solid var(--border);
-			border-radius: 22px;
-			padding: 18px;
-			box-shadow: var(--shadow);
-		}
-
-		.form-grid {
-			display: grid;
-			gap: 10px;
-		}
-
-		.field label {
-			display: block;
-			font-size: 11px;
-			font-weight: 700;
-			color: var(--muted);
-			margin-bottom: 6px;
-		}
-
-		.field input,
-		.field select {
-			width: 100%;
-			border: 1px solid var(--border);
-			background: var(--surface-2);
-			color: var(--text);
-			padding: 13px;
-			border-radius: 12px;
-			outline: none;
-		}
-
-		.field input:focus,
-		.field select:focus {
-			border-color: var(--primary);
-		}
-
-		.form-submit {
-			width: 100%;
-			margin-top: 4px;
-			background: var(--primary);
-			color: #03150c;
-		}
-
-		/* STATS */
-
-		.stats {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			gap: 8px;
-			margin-top: 20px;
-		}
-
-		.stat {
-			text-align: center;
-			background: var(--surface);
-			border: 1px solid var(--border);
-			border-radius: 16px;
-			padding: 15px 6px;
-		}
-
-		.stat strong {
-			display: block;
-			font-size: 19px;
-			color: var(--primary);
-		}
-
-		.stat span {
-			color: var(--muted);
-			font-size: 9px;
-		}
-
-		/* FOOTER */
-
-		footer {
-			margin-top: 35px;
-			padding: 25px 0 15px;
-			border-top: 1px solid var(--border);
-			color: var(--muted);
-			font-size: 11px;
-			text-align: center;
-		}
-
-		/* BOTTOM NAV */
-
-		.bottom-nav {
-			position: fixed;
-			z-index: 200;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			height: calc(68px + env(safe-area-inset-bottom));
-			padding-bottom: env(safe-area-inset-bottom);
-			background: color-mix(in srgb, var(--surface) 94%, transparent);
-			backdrop-filter: blur(18px);
-			border-top: 1px solid var(--border);
-			display: grid;
-			grid-template-columns: repeat(4, 1fr);
-		}
-
-		.bottom-nav a {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			gap: 4px;
-			color: var(--muted);
-			font-size: 10px;
-			font-weight: 700;
-		}
-
-		.bottom-nav a span:first-child {
-			font-size: 19px;
-		}
-
-		.bottom-nav a.active {
-			color: var(--primary-dark);
-		}
-
-		body.dark .bottom-nav a.active {
-			color: #39df91;
-		}
-
-		/* TOAST */
-
-		.toast {
-			position: fixed;
-			left: 50%;
-			bottom: 88px;
-			transform: translate(-50%, 20px);
-			background: #102019;
-			color: white;
-			padding: 11px 15px;
-			border-radius: 12px;
-			font-size: 12px;
-			font-weight: 700;
-			opacity: 0;
-			pointer-events: none;
-			transition: .25s ease;
-			z-index: 500;
-			white-space: nowrap;
-			box-shadow: 0 10px 30px rgba(0,0,0,.25);
-		}
-
-		.toast.show {
-			opacity: 1;
-			transform: translate(-50%, 0);
-		}
-
-		/* DESKTOP */
-
-		@media (min-width: 650px) {
-			body {
-				padding-bottom: 0;
-			}
-
-			.container {
-				width: min(92%, 1100px);
-			}
-
-			.hero {
-				padding-top: 45px;
-			}
-
-			.hero-box {
-				padding: 55px;
-			}
-
-			.services {
-				grid-template-columns: repeat(4, 1fr);
-			}
-
-			.destinations {
-				grid-template-columns: repeat(4, 1fr);
-			}
-
-			.form-grid {
-				grid-template-columns: 1fr 1fr 1fr auto;
-				align-items: end;
-			}
-
-			.form-submit {
-				width: auto;
-				margin-top: 0;
-			}
-
-			.bottom-nav {
-				display: none;
-			}
-
-			footer {
-				padding-bottom: 35px;
-			}
-		}
-	</style>
+  <base href="https://flytripvisa.site/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+
+  <!-- ==================== PRIMARY META TAGS ==================== -->
+  <title>Fly Trip Visa | 飞行旅行签证 – Global Visa, Flights & Hotel Booking</title>
+  <meta name="title" content="Fly Trip Visa | 飞行旅行签证 – Global Visa, Flights & Hotel Booking">
+  <meta name="description" content="Fly Trip Visa – Your one-stop travel solution for visa applications, flight bookings, hotel reservations & business setup. Specialists in China, UAE, Asia & Global travel.">
+  <meta name="keywords" content="Fly Trip Visa, 飞行旅行签证, visa application, flight booking, hotel reservation, China visa, Dubai visa, travel agency, business setup China, online visa, freelance visa, residency ID">
+  <meta name="author" content="Fly Trip Visa | 飞行旅行签证">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="language" content="English, Chinese, Bengali, Arabic, Vietnamese">
+  <meta name="revisit-after" content="7 days">
+  <meta name="rating" content="general">
+  <link rel="canonical" href="https://flytripvisa.site/">
+  <link rel="alternate" hreflang="en" href="https://flytripvisa.site/">
+  <link rel="alternate" hreflang="zh" href="https://flytripvisa.site/">
+  <link rel="alternate" hreflang="bn" href="https://flytripvisa.site/">
+  <link rel="alternate" hreflang="vi" href="https://flytripvisa.site/">
+  <link rel="alternate" hreflang="x-default" href="https://flytripvisa.site/">
+  <meta name="google-site-verification" content="Ifx8LAOJ8lqwnjqJwbiVC7-3uWSnBKUXBcCucSmF7V4">
+  <meta name="baidu-site-verification" content="YOUR_BAIDU_VERIFICATION_CODE">
+  <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE">
+
+  <!-- ==================== OPEN GRAPH ==================== -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flytripvisa.site/">
+  <meta property="og:title" content="Fly Trip Visa | 飞行旅行签证 – Ai Powerd Miniprogram & Apps">
+  <meta property="og:description" content="Specialized visa assistance, flight & hotel booking, and China/Dubai business setup. Instant E-Visa processing for 150+ countries.">
+  <meta property="og:image" content="https://pub-b261978d710f40a0944a1ed1d89e1399.r2.dev/Img/Fly%20Trip%20Visa%20%7C%20%E9%A3%9E%E8%A1%8C%E6%97%85%E8%A1%8C%E7%AD%BE%E8%AF%81%20Promotion%201/Social%20media%20AD%201%20Nusrat_20260803_103503_0000.png">
+  <meta property="og:image:secure_url" content="https://pub-b261978d710f40a0944a1ed1d89e1399.r2.dev/Img/Fly%20Trip%20Visa%20%7C%20%E9%A3%9E%E8%A1%8C%E6%97%85%E8%AF%81%20Promotion%201/Social%20media%20AD%201%20Nusrat_20260803_103503_0000.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:site_name" content="Fly Trip Visa">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:locale:alternate" content="bn_BD">
+
+  <!-- ==================== TWITTER ==================== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://flytripvisa.site/">
+  <meta name="twitter:title" content="Fly Trip Visa | 飞行旅行签证 – Global Visa & Business Partner">
+  <meta name="twitter:description" content="FlyTripVisa - Global Visa, Flights & Hotel booking – one click AI Powerd miniprogramsolutions for Asia and the world.">
+  <meta name="twitter:image" content="https://pub-b261978d710f40a0944a1ed1d89e1399.r2.dev/Img/Fly%20Trip%20Visa%20%7C%20%E9%A3%9E%E8%A1%8C%E6%97%85%E8%A1%8C%E7%AD%BE%E8%AF%81%20Promotion%201/Social%20media%20AD%201%20Nusrat_20260803_103503_0000.png">
+
+  <!-- ==================== GEO ==================== -->
+  <meta name="geo.region" content="AE-DU">
+  <meta name="geo.placename" content="Dubai">
+  <meta name="geo.position" content="25.2048;55.2708">
+  <meta name="ICBM" content="25.2048, 55.2708">
+
+  <!-- ==================== FAVICON / PWA ==================== -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/FlyTripVisa/miniprogram/refs/heads/main/Img/Black%20Dragon%20Flat%20Illustrative%20E-Sports%20Gaming%20Logo.png">
+  <meta name="theme-color" content="#07c160">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="FlyTripVisa">
+  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Fly%20Trip%20Visa%20%7C%20%E9%A3%9E%E8%A1%8C%E6%97%85%E8%A1%8C%E7%AD%BE%E8%AF%81%22%2C%22short_name%22%3A%22FlyTripVisa%22%2C%22description%22%3A%22Global%20visa%2C%20flights%20%26%20hotel%20booking%20%E2%80%93%20one%20click%20solutions.%22%2C%22start_url%22%3A%22%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23000000%22%2C%22theme_color%22%3A%22%2307c160%22%7D">
+
+  <!-- ==================== JSON-LD ==================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "name": "Fly Trip Visa",
+    "alternateName": "飞行旅行签证",
+    "url": "https://flytripvisa.site/",
+    "logo": "https://pub-b261978d710f40a0944a1ed1d89e1399.r2.dev/Img/flytripvisa-logo1.png",
+    "image": "https://pub-b261978d710f40a0944a1ed1d89e1399.r2.dev/Img/Fly%20Trip%20Visa%20%7C%20%E9%A3%9E%E8%A1%8C%E6%97%85%E8%A1%8C%E7%AD%BE%E8%AF%81%20Promotion%201/Social%20media%20AD%201%20Nusrat_20260803_103503_0000.png",
+    "description": "Specialized visa assistance, flight bookings, hotel reservations, and China/Dubai business setup.",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dubai",
+      "addressCountry": "UAE"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+8801338354383",
+      "contactType": "customer service",
+      "email": "visa@flytripvisa.site",
+      "availableLanguage": ["English", "Chinese", "Bengali", "Arabic", "Vietnamese"]
+    },
+    "sameAs": [
+      "https://www.facebook.com/share/1P3KMMUeAH/",
+      "https://www.instagram.com/flyviewvisa.site?igsh=Z29scXo5NzYxMnkw",
+      "https://t.me/TripVisa",
+      "https://wa.me/60109654305"
+    ]
+  }
+  </script>
+
+  <!-- ==================== ANALYTICS ==================== -->
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"b73b80fa62deef032d3c08248cf2f30b"}'></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <style>
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+      -webkit-tap-highlight-color:transparent;
+      outline:none!important
+    }
+    html, body{
+      width:100%;
+      min-height:100%;
+    }
+    body{
+      background:#111111;
+      color:#eaeaea;
+      font-size:15px;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.4;
+    }
+    a,button{
+      text-decoration:none;
+      -webkit-tap-highlight-color:transparent
+    }
+    ul{list-style:none}
+    @keyframes show{
+      0%{opacity:0;transform:translateY(15px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    .wrap{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden
+    }
+    .main-content{
+      flex:1 0 auto
+    }
+
+    /* ==================== HEADER + BANNER ==================== */
+    .banner{
+      position:relative;
+      color:#ffffffe6;
+      padding:75px 0 50px;
+      text-align:center;
+      background:url('https://pub-b261978d710f40a0944a1ed1d89e1399.r2.dev/Img/Fly%20Trip%20Visa%20%7C%20%E9%A3%9E%E8%A1%8C%E6%97%85%E8%A1%8C%E7%AD%BE%E8%AF%81%20Promotion%201/Hero%20section_1_20260803_054722_0000.jpg') no-repeat center center/cover;
+      overflow:hidden
+    }
+    .banner__inner{
+      background:linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45));
+      border-radius:0 0 50% 50%;
+      position:absolute;
+      bottom:0;
+      left:50%;
+      transform:translateX(-50%);
+      width:150%;
+      min-width:1440px;
+      height:100%;
+      z-index:-1;
+      overflow:hidden
+    }
+    .header-top{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px 20px;
+      z-index:50
+    }
+    .header-left-logo img{
+      height:60px;
+      width:auto;
+      object-fit:contain
+    }
+    .banner__bd{
+      position:relative;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      animation:show .4s both;
+      padding:0 20px;
+      margin-top:40px
+    }
+    .banner__desc{
+      font-size:20px;
+      font-weight:700;
+      letter-spacing:.3px;
+      margin:0
+    }
+    .banner__subdesc{
+      font-size:13px;
+      opacity:.85;
+      margin-top:12px;
+      max-width:620px;
+      line-height:1.5
+    }
+    .badge-gold{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:18px;
+      height:18px;
+      background:#07c160;
+      color:#fff;
+      font-size:11px;
+      font-weight:bold;
+      border-radius:50%;
+      margin-left:6px;
+      vertical-align:middle
+    }
+
+    /* ==================== QUICK BUTTONS ==================== */
+    .banner__download{
+      display:flex;
+      flex-direction:row;
+      gap:12px;
+      margin-top:20px;
+      justify-content:center
+    }
+    .banner__download-item{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.55);
+      border-radius:50%;
+      width:58px;
+      height:58px;
+      cursor:pointer;
+      color:#fff;
+      font-size:9px;
+      text-align:center;
+      transition:.2s;
+      border:1px solid rgba(255,255,255,.2)
+    }
+    .banner__download-item:hover{
+      background:rgba(0,0,0,.75);
+      transform:translateY(-2px)
+    }
+    .banner__download-item i{
+      width:20px;
+      height:20px;
+      background-size:contain;
+      background-repeat:no-repeat;
+      background-position:center;
+      margin-bottom:3px;
+      display:block
+    }
+    .banner__download-item span{
+      font-size:9px;
+      line-height:1.1
+    }
+
+    /* ==================== MENU ==================== */
+    .lang_change{
+      position:relative
+    }
+    .lang-switcher__trigger{
+      background:rgba(255,255,255,.2);
+      border:1px solid rgba(255,255,255,.4);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      gap:4px;
+      font-size:11px;
+      font-weight:700;
+      cursor:pointer;
+      padding:4px 14px;
+      border-radius:20px;
+      height:26px;
+      transition:.2s
+    }
+    .lang-switcher__trigger:hover{
+      background:rgba(255,255,255,.35)
+    }
+    .dropdown-menu{
+      position:absolute;
+      right:0;
+      top:34px;
+      background:#fff;
+      border-radius:6px;
+      box-shadow:0 10px 30px rgba(0,0,0,.2);
+      width:250px;
+      max-height:320px;
+      overflow-y:auto;
+      display:none;
+      flex-direction:column;
+      z-index:1000;
+      padding:4px 0
+    }
+    .dropdown-menu.show{
+      display:flex
+    }
+    .dropdown-menu a{
+      padding:10px;
+      color:#333;
+      font-size:11px;
+      border-bottom:1px solid #f1f1f1;
+      white-space:nowrap
+    }
+    .dropdown-menu a:hover{
+      background:#f8f9fa;
+      color:#07c160
+    }
+
+    /* ==================== SEARCH ==================== */
+    .search-wrap{
+      max-width:520px;
+      width:100%;
+      margin:18px auto 0;
+      display:flex;
+      gap:8px;
+      background:rgba(255,255,255,.2);
+      border:1px solid rgba(255,255,255,.4);
+      border-radius:24px;
+      padding:4px 4px 4px 14px;
+      backdrop-filter:blur(4px)
+    }
+    .search-wrap input{
+      flex:1;
+      background:transparent;
+      border:none;
+      color:#fff;
+      font-size:14px;
+      outline:none
+    }
+    .search-wrap input::placeholder{
+      color:rgba(255,255,255,.8)
+    }
+    .search-wrap button{
+      background:#fff;
+      color:#000;
+      border:none;
+      border-radius:20px;
+      padding:6px 16px;
+      font-size:12px;
+      font-weight:600;
+      cursor:pointer
+    }
+    .search-wrap .voice-trigger{
+      background:transparent;
+      border:none;
+      color:rgba(255,255,255,.8);
+      font-size:16px;
+      cursor:pointer;
+      padding:4px 6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:color .2s;
+      flex-shrink:0
+    }
+    .search-wrap .voice-trigger:hover{
+      color:#fff
+    }
+    .search-wrap .voice-trigger.recording{
+      color:#ff4444;
+      animation:pulse 1.2s infinite
+    }
+
+    /* ==================== ADS ==================== */
+    .ad-banner-wrap{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      margin:12px auto;
+      width:100%;
+      max-width:1400px;
+      padding:0
+    }
+    .uniform-ad{
+      width:380px;
+      height:140px;
+      object-fit:cover;
+      border-radius:16px;
+      cursor:pointer;
+      display:block;
+      transition:transform .2s ease;
+      background:transparent;
+      border:none;
+      box-shadow:none
+    }
+    .uniform-ad:hover{
+      transform:scale(1.01)
+    }
+    .grid-ad-card{
+      grid-column:1/-1;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      margin:8px 0;
+      width:100%;
+      background:transparent;
+      border:none;
+      box-shadow:none;
+      padding:0
+    }
+    .grid-ad-card a{
+      display:block;
+      width:100%;
+      border-radius:16px;
+      overflow:hidden
+    }
+
+    /* ==================== VISA GRID ==================== */
+    .section-wrap{
+      max-width:1200px;
+      margin:18px auto;
+      padding:0 14px
+    }
+    .section-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:10px
+    }
+    .section-head h2{
+      font-size:18px;
+      font-weight:700;
+      color:#fff
+    }
+    .section-head span{
+      font-size:11px;
+      color:#ddd;
+      background:#1a1a1a;
+      padding:5px 12px;
+      border-radius:20px;
+      box-shadow:0 2px 6px rgba(0,0,0,.3)
+    }
+    .visa-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:8px
+    }
+    @media(min-width:640px){
+      .visa-grid{
+        grid-template-columns:repeat(3,1fr)
+      }
+    }
+    @media(min-width:1024px){
+      .visa-grid{
+        grid-template-columns:repeat(4,1fr)
+      }
+    }
+    .visa-card{
+      background:#1a1a1a;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid #262626;
+      box-shadow:0 3px 12px rgba(0,0,0,.4);
+      transition:.25s ease;
+      cursor:pointer;
+      display:flex;
+      flex-direction:column
+    }
+    .visa-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 10px 24px rgba(7,193,96,.18);
+      border-color:#07c160
+    }
+    .visa-card-img-wrap{
+      position:relative;
+      width:100%;
+      height:140px;
+      overflow:hidden
+    }
+    .visa-card-img-wrap img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .3s ease
+    }
+    .visa-card:hover .visa-card-img-wrap img{
+      transform:scale(1.05)
+    }
+    .visa-badge{
+      position:absolute;
+      top:10px;
+      right:10px;
+      background:rgba(0,0,0,.7);
+      color:#fff;
+      font-size:9px;
+      font-weight:700;
+      padding:3px 8px;
+      border-radius:10px;
+      backdrop-filter:blur(4px);
+      text-transform:uppercase
+    }
+    .visa-card-body{
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      flex:1;
+      justify-content:space-between
+    }
+    .visa-country{
+      font-size:15px;
+      font-weight:700;
+      color:#fff;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis
+    }
+    .visa-type{
+      font-size:11px;
+      color:#a1a1a1
+    }
+    .visa-meta{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-top:1px dashed #2a2a2a;
+      padding-top:8px;
+      margin-top:4px
+    }
+    .visa-time{
+      font-size:10px;
+      color:#888;
+      font-weight:600
+    }
+    .visa-apply{
+      font-size:11px;
+      font-weight:700;
+      color:#fff;
+      background:#07c160;
+      padding:4px 12px;
+      border-radius:12px;
+      transition:background .2s
+    }
+    .visa-apply:hover{
+      background:#059c4d
+    }
+
+    /* ==================== FOOTER ==================== */
+    .footer-wrp{
+      width:100%;
+      flex-shrink:0;
+      margin-top:22px
+    }
+    .footer{
+      background:#0a0a0a;
+      padding:30px 20px 24px;
+      text-align:center;
+      width:100%;
+      color:#fff
+    }
+    .footer-desc{
+      max-width:620px;
+      margin:10px auto;
+      color:#a1a1aa;
+      font-size:12.5px;
+      line-height:1.6
+    }
+    .footer-heading{
+      font-size:13px;
+      font-weight:700;
+      margin:18px 0 12px;
+      letter-spacing:.3px;
+      color:red
+    }
+    .app-download-area{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:8px;
+      margin:0 0 14px
+    }
+    .app-badge-link{
+      background:transparent;
+      border:none!important;
+      padding:0!important;
+      box-shadow:none!important;
+      display:inline-block;
+      line-height:0
+    }
+    .app-badge-link img{
+      width:86px;
+      height:26px;
+      object-fit:contain;
+      display:block;
+      border-radius:12px
+    }
+    .footer-download{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      justify-content:center;
+      align-items:center;
+      margin:0 0 10px
+    }
+    .footer-download-item{
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:#000;
+      border:1px solid rgba(255,255,255,.12);
+      color:#fff!important;
+      cursor:pointer;
+      transition:.2s;
+      text-decoration:none;
+      flex-shrink:0;
+      line-height:0
+    }
+    .footer-download-item i{
+      font-size:13px;
+      width:13px;
+      height:13px;
+      display:block;
+      line-height:1
+    }
+    .footer-download-item:hover{
+      background:#07c160!important;
+      border-color:#07c160!important;
+      transform:translateY(-2px) scale(1.05)
+    }
+    .footer__links{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:8px;
+      font-size:11px;
+      margin-bottom:12px
+    }
+    .footer__links a{
+      color:#ff5a5a;
+      transition:.15s
+    }
+    .footer__links a:hover{
+      color:#ff8888;
+      text-decoration:underline
+    }
+    .footer__divider{
+      color:#3f3f46
+    }
+    .footer__copyright{
+      color:#71717a;
+      font-size:10.5px;
+      margin-top:8px
+    }
+    .footer__disclaimer{
+      max-width:620px;
+      margin:8px auto 4px;
+      color:#ff8888;
+      font-size:10.5px;
+      line-height:1.5;
+      font-style:italic
+    }
+    .custom-toast{
+      position:fixed;
+      bottom:25px;
+      left:50%;
+      transform:translateX(-50%);
+      background:rgba(0,0,0,.9);
+      color:#fff;
+      padding:10px 18px;
+      border-radius:20px;
+      font-size:12px;
+      z-index:9999;
+      opacity:0;
+      transition:.3s
+    }
+
+    /* ==================== PAYMENT ICONS (20x20) ==================== */
+    .payment-icons-row{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      gap:8px;
+      margin:0 0 16px
+    }
+    .payment-icon{
+      width:36px;
+      height:36px;
+      border-radius:8px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:#1a1a1a;
+      border:1px solid rgba(255,255,255,.14);
+      transition:.25s ease;
+      overflow:hidden;
+      flex-shrink:0;
+      position:relative
+    }
+    .payment-icon:hover{
+      transform:translateY(-3px) scale(1.08);
+      border-color:#07c160;
+      box-shadow:0 6px 16px rgba(7,193,96,.32)
+    }
+    .payment-icon img{
+      width:20px;
+      height:20px;
+      object-fit:contain;
+      display:block;
+      border-radius:4px
+    }
+    .payment-icon i{
+      font-size:20px;
+      color:#fff;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      line-height:1
+    }
+    .payment-icon svg{
+      width:20px;
+      height:20px;
+      display:block
+    }
+    .payment-icon.bkash{
+      background:#e2136e
+    }
+    .payment-icon.nagad{
+      background:#ec1c24
+    }
+    .payment-icon.tng{
+      background:#005bac
+    }
+    .payment-icon.mastercard{
+      background:#1a1a1a
+    }
+    .payment-icon.alipay{
+      background:#1677ff
+    }
+    .payment-icon.wechat{
+      background:#07c160
+    }
+    .payment-icon.usdt{
+      background:#26a17b
+    }
+    .payment-icon.jingpay{
+      background:#f5a623
+    }
+    .payment-icon.visa{
+      background:#1a1f71
+    }
+
+    /* ==================== ICONS ==================== */
+    .icon-visa{
+      background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%23fff' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2Z'/%3E%3C/svg%3E")
+    }
+    .icon-flight{
+      background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%23fff' stroke-width='2' d='M2 12l20-8-8 20-4-8-8-4Z'/%3E%3C/svg%3E")
+    }
+    .icon-pay{
+      background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%23fff' stroke-width='2' d='M21 4H3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2ZM1 10h22'/%3E%3C/svg%3E")
+    }
+    .icon-esim-btn{
+      background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%23fff' stroke-width='2' d='M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm4 5h6m-6 4h6'/%3E%3C/svg%3E")
+    }
+
+    /* =========================================================
+       AI CHAT POPUP FULLSCREEN + ANDROID/iPHONE KEYBOARD SAFE
+       FULL BLACK THEME
+       ========================================================= */
+    .ai-popup-overlay{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100dvh;
+      background:#000;
+      z-index:10000;
+      display:none;
+      align-items:stretch;
+      justify-content:stretch;
+      backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px);
+      overflow:hidden;
+      overscroll-behavior:none
+    }
+    .ai-popup-overlay.show{
+      display:flex;
+      animation:fadeIn .25s ease
+    }
+    @keyframes fadeIn{
+      from{opacity:0}
+      to{opacity:1}
+    }
+    @keyframes slideUp{
+      from{transform:translateY(100%)}
+      to{transform:translateY(0)}
+    }
+    .ai-popup{
+      background:#000;
+      width:100%;
+      height:100dvh;
+      max-width:none;
+      max-height:none;
+      border-radius:0;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      animation:slideUp .3s ease;
+      position:relative
+    }
+
+    /* ==================== CHAT HEADER (SLIM / BLACK) ==================== */
+    .ai-popup-header{
+      flex:0 0 52px;
+      min-height:52px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding: calc(8px + env(safe-area-inset-top)) 16px 8px 16px;
+      border-bottom:1px solid #1a1a1a;
+      background:#000;
+      z-index:5
+    }
+    .ai-popup-header h3{
+      font-size:14px;
+      font-weight:700;
+      color:#fff;
+      margin:0;
+      display:flex;
+      align-items:center;
+      gap:6px
+    }
+    .ai-popup-close{
+      width:32px;
+      height:32px;
+      min-width:32px;
+      border-radius:50%;
+      border:none;
+      background:#1a1a1a;
+      color:#fff;
+      font-size:18px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:.2s
+    }
+    .ai-popup-close:hover{
+      background:#2a2a2a
+    }
+
+    /* ==================== CHAT HISTORY (BLACK) ==================== */
+    .ai-popup-messages{
+      flex:1 1 auto;
+      min-height:0;
+      overflow-y:auto;
+      overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain;
+      padding:18px 20px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      background:#000;
+      scroll-behavior:smooth
+    }
+    .ai-msg{
+      max-width:85%;
+      padding:10px 14px;
+      border-radius:16px;
+      font-size:13.5px;
+      line-height:1.5;
+      word-break:break-word
+    }
+    .ai-msg.user{
+      background:#07c160;
+      color:#fff;
+      align-self:flex-end;
+      border-bottom-right-radius:4px
+    }
+    .ai-msg.bot{
+      background:#111;
+      color:#eee;
+      align-self:flex-start;
+      border:1px solid #222;
+      border-bottom-left-radius:4px;
+      box-shadow:0 2px 8px rgba(0,0,0,.6)
+    }
+    .ai-msg.bot .ai-visa-card{
+      display:flex;
+      gap:10px;
+      margin-top:8px;
+      padding:10px;
+      background:#1a1a1a;
+      border-radius:10px;
+      align-items:center;
+      text-decoration:none;
+      color:inherit
+    }
+    .ai-msg.bot .ai-visa-card img{
+      width:48px;
+      height:48px;
+      border-radius:8px;
+      object-fit:cover;
+      flex-shrink:0
+    }
+    .ai-msg.bot .ai-visa-card .vname{
+      font-weight:700;
+      font-size:13px;
+      color:#fff
+    }
+    .ai-msg.bot .ai-visa-card .vtype{
+      font-size:11px;
+      color:#aaa
+    }
+    .ai-msg.loading{
+      display:flex;
+      gap:4px;
+      align-items:center
+    }
+    .ai-msg.loading span{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#555;
+      animation:bounce 1.2s infinite
+    }
+    .ai-msg.loading span:nth-child(2){
+      animation-delay:.2s
+    }
+    .ai-msg.loading span:nth-child(3){
+      animation-delay:.4s
+    }
+    @keyframes bounce{
+      0%,80%,100%{transform:scale(.6)}
+      40%{transform:scale(1)}
+    }
+
+    /* ==================== CHAT FOOTER / INPUT (SLIM / BLACK) ==================== */
+    .ai-popup-input{
+      flex:0 0 auto;
+      min-height:58px;
+      display:flex;
+      gap:6px;
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom)) 12px;
+      border-top:1px solid #1a1a1a;
+      background:#000;
+      align-items:center;
+      z-index:5
+    }
+    .ai-popup-input input{
+      flex:1;
+      min-width:0;
+      height:40px;
+      border:1px solid #333;
+      border-radius:20px;
+      padding:8px 14px;
+      font-size:16px;
+      outline:none;
+      transition:border .2s;
+      background:#111;
+      color:#fff;
+      -webkit-appearance:none
+    }
+    .ai-popup-input input::placeholder{
+      color:#888
+    }
+    .ai-popup-input input:focus{
+      border-color:#07c160
+    }
+    .ai-popup-input button{
+      width:40px;
+      height:40px;
+      min-width:40px;
+      border-radius:50%;
+      border:none;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:15px;
+      transition:.2s;
+      flex-shrink:0
+    }
+    .ai-send-btn{
+      background:#07c160;
+      color:#fff
+    }
+    .ai-send-btn:hover{
+      background:#059c4d
+    }
+    .ai-voice-btn{
+      background:#1a1a1a;
+      color:#fff
+    }
+    .ai-voice-btn:hover{
+      background:#2a2a2a
+    }
+    .ai-voice-btn.recording{
+      background:#ff4444;
+      color:#fff;
+      animation:pulse 1.2s infinite
+    }
+    .ai-attach-btn{
+      background:#1a1a1a;
+      color:#fff
+    }
+    .ai-attach-btn:hover{
+      background:#2a2a2a
+    }
+    @keyframes pulse{
+      0%,100%{opacity:1}
+      50%{opacity:.7}
+    }
+
+    /* ==================== MOBILE CHAT ==================== */
+    @media(max-width:760px){
+      .header-top{
+        padding:12px 14px
+      }
+      .header-left-logo img{
+        height:28px
+      }
+      .banner{
+        padding:55px 0 40px
+      }
+      .banner__download-item{
+        width:50px;
+        height:50px
+      }
+      .app-badge-link img{
+        width:125px;
+        height:38px
+      }
+      .ai-popup-overlay{
+        height:100dvh
+      }
+      .ai-popup{
+        width:100%;
+        height:100dvh;
+        min-height:100dvh;
+        max-height:none;
+        border-radius:0
+      }
+      .ai-popup-header{
+        flex-basis:54px;
+        min-height:54px;
+        padding-top:calc(10px + env(safe-area-inset-top));
+      }
+      .ai-popup-messages{
+        padding:14px 12px;
+        gap:10px
+      }
+      .ai-msg{
+        max-width:90%;
+        font-size:14px
+      }
+      .ai-popup-input{
+        min-height:60px;
+        padding: 8px 10px calc(10px + env(safe-area-inset-bottom)) 10px
+      }
+      .ai-popup-input input{
+        height:42px;
+        font-size:16px
+      }
+      .ai-popup-input button{
+        width:42px;
+        height:42px;
+        min-width:42px
+      }
+      .payment-icon{
+        width:32px;
+        height:32px;
+        border-radius:8px
+      }
+      .payment-icon svg,
+      .payment-icon img,
+      .payment-icon i{
+        width:20px;
+        height:20px;
+        font-size:20px
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-	<header>
-		<div class="container nav">
-			<a href="#" class="brand">
-				<div class="logo">✈</div>
-				<div>
-					FLYTRIPVISA
-					<small>TRAVEL • VISA • FLIGHTS</small>
-				</div>
-			</a>
-
-			<div class="nav-actions">
-				<button class="icon-btn" id="themeBtn" aria-label="Toggle theme">☾</button>
-				<button class="icon-btn" id="menuBtn" aria-label="Menu">☰</button>
-			</div>
-		</div>
-	</header>
-
-	<main>
-
-		<div class="container">
-
-			<section class="hero">
-				<div class="hero-box">
-					<div class="badge">
-						<span class="dot"></span>
-						TRAVEL ASSISTANCE ONLINE
-					</div>
-
-					<h1>
-						Your journey.<br>
-						<span>Our expertise.</span>
-					</h1>
-
-					<p>
-						Apply for visas, discover destinations, book flights and hotels —
-						all from one simple travel portal.
-					</p>
-
-					<div class="hero-actions">
-						<a href="#visa" class="btn btn-primary">
-							🚀 Apply for Visa
-						</a>
-
-						<a href="#services" class="btn btn-light">
-							Explore Services
-						</a>
-					</div>
-				</div>
-			</section>
-
-			<div class="search-card">
-				<div class="search-title">🔎 What are you looking for?</div>
-
-				<div class="search-row">
-					<input
-						id="searchInput"
-						class="search-input"
-						type="search"
-						placeholder="Visa, country, flight, hotel..."
-						autocomplete="off"
-					>
-
-					<button class="search-button" id="searchBtn">
-						⌕
-					</button>
-				</div>
-			</div>
-
-			<section id="services">
-				<div class="section-head">
-					<div>
-						<h2>Our Services</h2>
-						<p>Everything you need for your journey</p>
-					</div>
-				</div>
-
-				<div class="services">
-
-					<a href="#visa" class="service">
-						<div class="service-icon">🛂</div>
-						<h3>Visa Services</h3>
-						<p>Visa assistance for destinations worldwide.</p>
-					</a>
-
-					<a href="#flights" class="service">
-						<div class="service-icon">✈️</div>
-						<h3>Flight Booking</h3>
-						<p>Find flights and plan your next journey.</p>
-					</a>
-
-					<a href="#hotels" class="service">
-						<div class="service-icon">🏨</div>
-						<h3>Hotels</h3>
-						<p>Comfortable stays at your destination.</p>
-					</a>
-
-					<a href="#business" class="service">
-						<div class="service-icon">💼</div>
-						<h3>Business Setup</h3>
-						<p>Business and company setup assistance.</p>
-					</a>
-
-				</div>
-			</section>
-
-			<section>
-				<div class="section-head">
-					<div>
-						<h2>Popular Destinations</h2>
-						<p>Start planning your next trip</p>
-					</div>
-					<a href="#visa" class="view-all">View all →</a>
-				</div>
-
-				<div class="destinations">
-
-					<a class="destination" href="#visa">
-						<span class="flag">🇨🇳</span>
-						<div class="destination-content">
-							<h3>China</h3>
-							<p>Visa assistance</p>
-						</div>
-					</a>
-
-					<a class="destination" href="#visa">
-						<span class="flag">🇯🇵</span>
-						<div class="destination-content">
-							<h3>Japan</h3>
-							<p>Explore Japan</p>
-						</div>
-					</a>
-
-					<a class="destination" href="#visa">
-						<span class="flag">🇦🇪</span>
-						<div class="destination-content">
-							<h3>UAE</h3>
-							<p>Dubai & Abu Dhabi</p>
-						</div>
-					</a>
-
-					<a class="destination" href="#visa">
-						<span class="flag">🇪🇺</span>
-						<div class="destination-content">
-							<h3>Europe</h3>
-							<p>Schengen assistance</p>
-						</div>
-					</a>
-
-				</div>
-			</section>
-
-			<section id="visa">
-				<div class="section-head">
-					<div>
-						<h2>Quick Visa Check</h2>
-						<p>Tell us where you want to travel</p>
-					</div>
-				</div>
-
-				<div class="form-card">
-
-					<div class="form-grid">
-
-						<div class="field">
-							<label>Destination</label>
-							<select id="destination">
-								<option value="">Select country</option>
-								<option>China</option>
-								<option>Japan</option>
-								<option>Malaysia</option>
-								<option>Thailand</option>
-								<option>Australia</option>
-								<option>New Zealand</option>
-								<option>Canada</option>
-								<option>United States</option>
-								<option>Europe / Schengen</option>
-								<option>Russia</option>
-								<option>Brazil</option>
-								<option>Mexico</option>
-							</select>
-						</div>
-
-						<div class="field">
-							<label>Passport Country</label>
-							<input id="passport" type="text" placeholder="e.g. Bangladesh">
-						</div>
-
-						<div class="field">
-							<label>Travel Date</label>
-							<input id="travelDate" type="date">
-						</div>
-
-						<button class="btn form-submit" id="checkVisa">
-							Check Visa →
-						</button>
-
-					</div>
-
-				</div>
-			</section>
-
-			<section id="flights">
-				<div class="section-head">
-					<div>
-						<h2>✈️ Flights</h2>
-						<p>Plan your route with ease</p>
-					</div>
-				</div>
-
-				<div class="form-card">
-					<p style="font-size:13px;line-height:1.7;color:var(--muted);">
-						Search and arrange flight bookings through our travel assistance team.
-					</p>
-
-					<button
-						class="btn btn-primary"
-						style="margin-top:13px;width:100%;"
-						onclick="showToast('Flight booking service selected')"
-					>
-						Search Flights
-					</button>
-				</div>
-			</section>
-
-			<section id="hotels">
-				<div class="section-head">
-					<div>
-						<h2>🏨 Hotels</h2>
-						<p>Find a comfortable place to stay</p>
-					</div>
-				</div>
-
-				<div class="form-card">
-					<p style="font-size:13px;line-height:1.7;color:var(--muted);">
-						Hotel reservation assistance for your international trip.
-					</p>
-
-					<button
-						class="btn btn-primary"
-						style="margin-top:13px;width:100%;"
-						onclick="showToast('Hotel booking service selected')"
-					>
-						Find Hotels
-					</button>
-				</div>
-			</section>
-
-			<section id="business">
-				<div class="section-head">
-					<div>
-						<h2>💼 Business Setup</h2>
-						<p>Build your international business</p>
-					</div>
-				</div>
-
-				<div class="form-card">
-					<p style="font-size:13px;line-height:1.7;color:var(--muted);">
-						Business setup and travel support for entrepreneurs and companies.
-					</p>
-
-					<button
-						class="btn btn-primary"
-						style="margin-top:13px;width:100%;"
-						onclick="showToast('Business service selected')"
-					>
-						Get Assistance
-					</button>
-				</div>
-			</section>
-
-			<div class="stats">
-				<div class="stat">
-					<strong>150+</strong>
-					<span>Countries</span>
-				</div>
-
-				<div class="stat">
-					<strong>24/7</strong>
-					<span>Online Support</span>
-				</div>
-
-				<div class="stat">
-					<strong>1</strong>
-					<span>Travel Portal</span>
-				</div>
-			</div>
-
-		</div>
-
-	</main>
-
-	<footer>
-		<div class="container">
-			<strong style="color:var(--text);">FLYTRIPVISA</strong>
-			<br><br>
-			© ${new Date().getFullYear()} FLYTRIPVISA. All rights reserved.
-			<br>
-			Visa • Flights • Hotels • Business
-		</div>
-	</footer>
-
-	<nav class="bottom-nav">
-
-		<a href="#" class="active">
-			<span>⌂</span>
-			Home
-		</a>
-
-		<a href="#visa">
-			<span>🛂</span>
-			Visa
-		</a>
-
-		<a href="#flights">
-			<span>✈️</span>
-			Flights
-		</a>
-
-		<a href="#hotels">
-			<span>🏨</span>
-			Hotels
-		</a>
-
-	</nav>
-
-	<div class="toast" id="toast"></div>
-
-	<script>
-		// Theme
-		const themeBtn = document.getElementById("themeBtn");
-
-		const savedTheme = localStorage.getItem("flytripvisa-theme");
-
-		if (savedTheme === "dark") {
-			document.body.classList.add("dark");
-			themeBtn.textContent = "☀";
-		}
-
-		themeBtn.addEventListener("click", () => {
-			document.body.classList.toggle("dark");
-
-			const dark = document.body.classList.contains("dark");
-
-			localStorage.setItem(
-				"flytripvisa-theme",
-				dark ? "dark" : "light"
-			);
-
-			themeBtn.textContent = dark ? "☀" : "☾";
-		});
-
-		// Toast
-		function showToast(message) {
-			const toast = document.getElementById("toast");
-
-			toast.textContent = message;
-			toast.classList.add("show");
-
-			setTimeout(() => {
-				toast.classList.remove("show");
-			}, 2200);
-		}
-
-		// Menu
-		document.getElementById("menuBtn").addEventListener("click", () => {
-			showToast("Menu coming soon");
-		});
-
-		// Search
-		const searchInput = document.getElementById("searchInput");
-
-		document.getElementById("searchBtn").addEventListener("click", () => {
-			const value = searchInput.value.trim();
-
-			if (!value) {
-				showToast("Please enter a destination or service");
-				searchInput.focus();
-				return;
-			}
-
-			showToast("Searching for: " + value);
-		});
-
-		searchInput.addEventListener("keydown", (event) => {
-			if (event.key === "Enter") {
-				document.getElementById("searchBtn").click();
-			}
-		});
-
-		// Visa checker
-		document.getElementById("checkVisa").addEventListener("click", () => {
-
-			const destination =
-				document.getElementById("destination").value;
-
-			const passport =
-				document.getElementById("passport").value.trim();
-
-			if (!destination) {
-				showToast("Please select your destination");
-				return;
-			}
-
-			if (!passport) {
-				showToast("Please enter your passport country");
-				return;
-			}
-
-			showToast(
-				"Checking " +
-				destination +
-				" visa for " +
-				passport
-			);
-		});
-
-		// Prevent empty demo links
-		document.querySelectorAll('a[href="#"]').forEach(link => {
-			link.addEventListener("click", event => {
-				event.preventDefault();
-				window.scrollTo({
-					top: 0,
-					behavior: "smooth"
-				});
-			});
-		});
-	</script>
-
+  <div class="wrap">
+    <div class="main-content">
+      <!-- ==================== HERO ==================== -->
+      <div class="banner">
+        <div class="banner__inner"></div>
+        <div class="header-top">
+          <div class="header-left-logo">
+            <img src="https://pub-b261978d710f40a0944a1ed1d89e1399.r2.dev/Img/flytripvisa-logo1.png" alt="FlyTripVisa Logo">
+          </div>
+          <div class="lang_change">
+            <button class="lang-switcher__trigger" id="dropdown_btn">
+              👽 ☰ Menu
+            </button>
+            <div class="dropdown-menu" id="dropdown_menu">
+              <a href="/apply.html" style="color:#07c160;font-weight:bold;">
+                En/Cz/Bn
+              </a>
+              <a href="/apply.html" style="color:#07c160;font-weight:bold;">
+                🆕 Apply Visa Now
+              </a>
+              <a href="/dashboard.html"> ✈️ Flights / Hotels </a>
+              <a href="/login.html"> 🆔 Login / Signup </a>
+              <a href="/jingpay.html"> 💳 Jing-Pay </a>
+              <a href="/jingpay.html"> 📡 eSim Card </a>
+              <a href="/contact.html"> 📞 Contact Us </a>
+              <hr style="border:0;border-top:1px solid #f1f1f1;margin:4px 0;">
+              <div class="footer__copyright">
+                Copyright © 2012-2026 Fly Trip Visa. All Rights Reserved.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="banner__bd">
+          <h1 class="banner__desc">
+            Fly Trip Visa | 飞行旅行签证 <span class="badge-gold">✓</span>
+          </h1>
+          <p class="banner__subdesc">
+            Expert consulting for business setup, freelance visas, and residency ID processing in Dubai, China, Malaysia, and Vietnam.
+          </p>
+          <p class="banner__subdesc" style="margin-top:6px;">
+            FlyTripVisa - Powered by Fly Dragon AI Assistant. AI Powered Visa, Flights & Hotels Application and Bookings Website.
+          </p>
+          <!-- AI SEARCH -->
+          <div class="search-wrap">
+            <input type="search" id="searchInput" placeholder="Ask AI or search visa: Dubai, Turkey..." onkeydown="if(event.key==='Enter') aiHeroSubmit()" oninput="filterVisas()">
+            <button class="voice-trigger" id="heroVoiceBtn" onclick="aiHeroVoice()" title="Voice Search" type="button">
+              <i class="fas fa-microphone"></i>
+            </button>
+            <button class="send-btn" onclick="aiHeroSubmit()" type="button">
+              👽 ➔
+            </button>
+          </div>
+          <div class="banner__download">
+            <a class="banner__download-item" onclick="showToast('Visa Apply')">
+              <i class="icon-visa"></i>
+              <span>Visa</span>
+            </a>
+            <a class="banner__download-item" onclick="showToast('Flights')">
+              <i class="icon-flight"></i>
+              <span>Flights</span>
+            </a>
+            <a class="banner__download-item" onclick="showToast('Pay')">
+              <i class="icon-pay"></i>
+              <span>Pay</span>
+            </a>
+            <a class="banner__download-item" onclick="showToast('eSim Deals')">
+              <i class="icon-esim-btn"></i>
+              <span>eSim</span>
+            </a>
+            <a class="banner__download-item" href="/ai.html">
+              <p class="alien" style="font-size:14px;margin-top:4px;">👽</p>
+              <span>AIDragon</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== AD 1 ==================== -->
+      <div class="ad-banner-wrap">
+        <a href="#" onclick="showToast('Ad 1 Clicked')">
+          <img id="staticAd1" src="" alt="Ad 1" class="uniform-ad">
+        </a>
+      </div>
+
+      <!-- ==================== VISA SECTION ==================== -->
+      <main class="section-wrap">
+        <div class="section-head">
+          <h2> 🌍 E-Visa Applications </h2>
+          <span id="visaCount"> 40 Countries </span>
+        </div>
+        <div class="visa-grid" id="visaGrid">
+          <!-- Visa cards injected by JavaScript -->
+        </div>
+      </main>
+
+      <!-- ==================== AD 2 ==================== -->
+      <div class="ad-banner-wrap">
+        <a href="#" onclick="showToast('Ad 2 Clicked')">
+          <img id="staticAd2" src="" alt="Ad 2" class="uniform-ad">
+        </a>
+      </div>
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <div class="footer-wrp">
+      <footer class="footer">
+        <h2 class="banner__desc">
+          Fly Trip Visa | 飞行旅行签证 <span class="badge-gold">✓</span>
+        </h2>
+        <div class="footer-desc">
+          <p class="footer-desc">
+            Your trusted digital travel partner. With modern technology and a professional team, any complex visa processing and tour planning is now a breeze.
+          </p>
+        </div>
+        <div class="footer-heading"> 📲 Download Apps </div>
+        <div class="app-download-area">
+          <i class="fa-brands fa-app-store"></i>
+          <i class="fa-brands fa-android"></i>
+          <i class="fa-brands fa-google-play"></i>
+        </div>
+        <div class="footer-heading"> 👽 Connect With Us </div>
+        <div class="footer-download">
+          <a class="footer-download-item" href="https://www.facebook.com/share/19QNbhx8Mo/" target="_blank" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a class="footer-download-item" href="https://work.weixin.qq.com/wework_admin/common/openBotProfile/241e0ee696d9311dccde74127a07849270" target="_blank" aria-label="WeCom">
+            <i class="fa-brands fa-weixin"></i>
+          </a>
+          <a class="footer-download-item" href="https://www.instagram.com/flyviewvisa.site?stkn=Z29scXo5NzYxMnkw" target="_blank" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a class="footer-download-item" href="https://t.me/flytripvisa_bot" target="_blank" aria-label="Telegram">
+            <i class="fa-brands fa-telegram"></i>
+          </a>
+          <a class="footer-download-item" href="https://wa.me/8801338354383" target="_blank" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+          <a class="footer-download-item" href="https://whatsapp.com/channel/0029VbC1mcU9mrGUPF1iyA1D" target="_blank" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+
+        <!-- ==================== GLOBAL PAYMENTS (20x20 ICONS) ==================== -->
+        <div class="footer-heading"> 💳 Global Payments </div>
+        <div class="payment-icons-row">
+
+          <!-- bKash (Bangladesh) -->
+          <span class="payment-icon bkash" title="bKash">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="8" fill="#e2136e"/>
+              <text x="20" y="27" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff" font-family="Arial, sans-serif">bKash</text>
+            </svg>
+          </span>
+
+          <!-- Nagad (Bangladesh) -->
+          <span class="payment-icon nagad" title="Nagad">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="8" fill="#ec1c24"/>
+              <text x="20" y="27" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff" font-family="Arial, sans-serif">Nagad</text>
+            </svg>
+          </span>
+
+          <!-- Touch 'n Go eWallet (Malaysia) -->
+          <span class="payment-icon tng" title="Touch 'n Go eWallet">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="8" fill="#005bac"/>
+              <text x="20" y="23" text-anchor="middle" font-size="9" font-weight="bold" fill="#fff" font-family="Arial, sans-serif">Touch</text>
+              <text x="20" y="33" text-anchor="middle" font-size="9" font-weight="bold" fill="#fff" font-family="Arial, sans-serif">'n Go</text>
+            </svg>
+          </span>
+
+          <!-- Mastercard -->
+          <span class="payment-icon mastercard" title="Mastercard">
+            <i class="fa-brands fa-cc-mastercard" style="color:#eb001b;"></i>
+          </span>
+
+          <!-- Visa -->
+          <span class="payment-icon visa" title="Visa">
+            <i class="fa-brands fa-cc-visa" style="color:#fff;"></i>
+          </span>
+
+          <!-- Alipay -->
+          <span class="payment-icon alipay" title="Alipay">
+            <i class="fa-brands fa-alipay" style="color:#fff;"></i>
+          </span>
+
+          <!-- WeChat Pay -->
+          <span class="payment-icon wechat" title="WeChat Pay">
+            <i class="fa-brands fa-weixin" style="color:#fff;"></i>
+          </span>
+
+          <!-- USDT / Crypto -->
+          <span class="payment-icon usdt" title="USDT / Crypto">
+            <i class="fa-brands fa-bitcoin" style="color:#fff;"></i>
+          </span>
+
+          <!-- Jing-Pay -->
+          <span class="payment-icon jingpay" title="Jing-Pay">
+            <i class="fa-solid fa-bolt" style="color:#fff;"></i>
+          </span>
+
+        </div>
+
+        <div class="footer__links">
+          <a href="https://flytripvisa.site/service_terms.html"> Terms of Service </a>
+          <span class="footer__divider">|</span>
+          <a href="https://flytripvisa.site/privacy_policy.html"> Privacy Policy </a>
+          <span class="footer__divider">|</span>
+          <a href="https://flytripvisa.site/contact_us.html"> Contact Us </a>
+        </div>
+        <div class="footer__disclaimer">
+          Note: We do not guarantee 100% visa issuance. Visas are always issued based on the documents specified by the embassy.
+        </div>
+        <div class="footer__copyright">
+          Copyright © 2020 Fly Trip Visa. All Rights Reserved.
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       AI CHAT POPUP
+       ========================================================= -->
+  <div class="ai-popup-overlay" id="aiPopup">
+    <div class="ai-popup" id="aiPopupBox">
+      <div class="ai-popup-header">
+        <h3> Fly Dragon 🐉 AI Assistant </h3>
+        <button class="ai-popup-close" onclick="aiPopupClose()" type="button" aria-label="Close AI Chat">
+          &times;
+        </button>
+      </div>
+      <div class="ai-popup-messages" id="aiMessages">
+        <div class="ai-msg bot">
+          Hello! I'm your Fly Dragon 🐉 AI Assistant. Ask me about visa, flight, hotels requirements, processing times, or anything travel-related. 🌍
+        </div>
+      </div>
+      <div class="ai-popup-input">
+        <button class="ai-voice-btn" id="popupVoiceBtn" onclick="aiPopupVoice()" title="Voice Input" type="button">
+          <i class="fas fa-microphone"></i>
+        </button>
+        <button class="ai-attach-btn" id="popupAttachBtn" onclick="aiAttachFile()" title="Attach File" type="button" aria-label="Attach File">
+          <i class="fas fa-paperclip"></i>
+        </button>
+        <input type="text" id="aiPopupInput" placeholder="Type your message..." autocomplete="off" enterkeyhint="send" onkeydown="if(event.key==='Enter') aiPopupSend()">
+        <button class="ai-send-btn" onclick="aiPopupSend()" type="button" aria-label="Send message">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+        <input type="file" id="popupFileInput" style="display:none">
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       VISA + AD MANAGER
+       ========================================================= -->
+  <script>
+    const adManager = {
+      staticBanners: [
+        "https://pub-b261978d710f40a0944a1ed1d89e1399.r2.dev/Img/Ad-Img/Flytripvisa%20AD%201%20Banner_20260803_032120_0000.png",
+        "https://pub-b261978d710f40a0944a1ed1d89e1399.r2.dev/Img/Ad-Img/%F0%9F%91%BDFLYTRIPVISA_20260803_022927_0000.jpg"
+      ],
+      gridAds: [
+        "https://pub-b261978d710f40a0944a1ed1d89e1399.r2.dev/Img/Ad-Img/Flytripvisa%20AD%201%20Banner_20260803_032120_0000.png",
+        "https://pub-b261978d710f40a0944a1ed1d89e1399.r2.dev/Img/Ad-Img/%F0%9F%91%BDFLYTRIPVISA_20260803_022927_0000.jpg"
+      ]
+    };
+
+    const visaData = [
+      { country:"UAE / Dubai", type:"Tourist • 30/60 Days", time:"⏱ 24-48h", badge:"E-Visa", img:"https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&auto=format&fit=crop&q=80" },
+      { country:"Turkey", type:"Tourist • 30 Days", time:"⏱ 24h", badge:"E-Visa", img:"https://images.unsplash.com/photo-1541432901042-2d8bd64b3a9b?w=600&auto=format&fit=crop&q=80" },
+      { country:"Malaysia", type:"eVISA • 30 Days", time:"⏱ 48h", badge:"E-Visa", img:"https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=600&auto=format&fit=crop&q=80" },
+      { country:"Singapore", type:"Tourist • 30 Days", time:"⏱ 2-3 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=600&auto=format&fit=crop&q=80" },
+      { country:"Thailand", type:"E-VOA • 60 Days", time:"⏱ 24-72h", badge:"E-Visa", img:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format&fit=crop&q=80" },
+      { country:"Vietnam", type:"E-Visa • 90 Days", time:"⏱ 3-4 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1528164344705-475426879c0d?w=600&auto=format&fit=crop&q=80" },
+      { country:"Cambodia", type:"E-Visa • 30 Days", time:"⏱ 24h", badge:"E-Visa", img:"https://images.unsplash.com/photo-1548013146-72479768bada?w=600&auto=format&fit=crop&q=80" },
+      { country:"China", type:"Business / Tourist", time:"⏱ 4-5 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=600&auto=format&fit=crop&q=80" },
+      { country:"India", type:"e-Visa • 30/365 Days", time:"⏱ 48-72h", badge:"E-Visa", img:"https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600&auto=format&fit=crop&q=80" },
+      { country:"Sri Lanka", type:"ETA • 30 Days", time:"⏱ 24h", badge:"ETA", img:"https://images.unsplash.com/photo-1588598117301-299fb5e1f035?w=600&auto=format&fit=crop&q=80" },
+      { country:"Egypt", type:"E-Visa • 30 Days", time:"⏱ 2-3 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1539768940843-7a66270ec0d4?w=600&auto=format&fit=crop&q=80" },
+      { country:"Kenya", type:"eTA • 90 Days", time:"⏱ 48h", badge:"E-Visa", img:"https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&auto=format&fit=crop&q=80" },
+      { country:"Tanzania", type:"E-Visa • 90 Days", time:"⏱ 3 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&auto=format&fit=crop&q=80" },
+      { country:"Ethiopia", type:"E-Visa • 30 Days", time:"⏱ 24-48h", badge:"E-Visa", img:"https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&auto=format&fit=crop&q=80" },
+      { country:"Morocco", type:"E-Visa • 180 Days", time:"⏱ 3 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=600&auto=format&fit=crop&q=80" },
+      { country:"Saudi Arabia", type:"Tourist • 90 Days", time:"⏱ 24h", badge:"E-Visa", img:"https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=600&auto=format&fit=crop&q=80" },
+      { country:"Qatar", type:"Hayya / Tourist", time:"⏱ 48h", badge:"E-Visa", img:"https://images.unsplash.com/photo-1512632578888-169bbbc64f33?w=600&auto=format&fit=crop&q=80" },
+      { country:"Oman", type:"E-Visa • 30 Days", time:"⏱ 2 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1584467735811-628a8d3c10f1?w=600&auto=format&fit=crop&q=80" },
+      { country:"Bahrain", type:"E-Visa • 14 Days", time:"⏱ 3-5 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1578895101408-1a364e49ee9f?w=600&auto=format&fit=crop&q=80" },
+      { country:"Kuwait", type:"E-Visa • 90 Days", time:"⏱ 3 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1582293041049-74d75d31fb84?w=600&auto=format&fit=crop&q=80" },
+      { country:"Azerbaijan", type:"ASAN • 30 Days", time:"⏱ 24h", badge:"ASAN", img:"https://images.unsplash.com/photo-1569389209871-0062c26252ff?w=600&auto=format&fit=crop&q=80" },
+      { country:"Georgia", type:"E-Visa • 30 Days", time:"⏱ 5 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1562674112-a1f6323a67c4?w=600&auto=format&fit=crop&q=80" },
+      { country:"Armenia", type:"E-Visa • 21 Days", time:"⏱ 3 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1566838803496-5e291120023a?w=600&auto=format&fit=crop&q=80" },
+      { country:"Uzbekistan", type:"E-Visa • 30 Days", time:"⏱ 2 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1583491456185-1d6706e224e7?w=600&auto=format&fit=crop&q=80" },
+      { country:"Kazakhstan", type:"E-Visa • 30 Days", time:"⏱ 5 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1598880940371-c756e015cad1?w=600&auto=format&fit=crop&q=80" },
+      { country:"United Kingdom", type:"ETA • 6 Months", time:"⏱ 72h", badge:"ETA", img:"https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&auto=format&fit=crop&q=80" },
+      { country:"Schengen EU", type:"Tourist • 90 Days", time:"⏱ 10-15 Days", badge:"Visa", img:"https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&auto=format&fit=crop&q=80" },
+      { country:"USA", type:"ESTA • 2 Years", time:"⏱ 72h", badge:"ESTA", img:"https://images.unsplash.com/photo-1485738422979-f5c462d49f74?w=600&auto=format&fit=crop&q=80" },
+      { country:"Canada", type:"eTA • 5 Years", time:"⏱ 24h", badge:"eTA", img:"https://images.unsplash.com/photo-1503614472-8c93d56e92ce?w=600&auto=format&fit=crop&q=80" },
+      { country:"Australia", type:"ETA • 1 Year", time:"⏱ 24h", badge:"ETA", img:"https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=600&auto=format&fit=crop&q=80" },
+      { country:"New Zealand", type:"NZeTA • 2 Years", time:"⏱ 72h", badge:"NZeTA", img:"https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600&auto=format&fit=crop&q=80" },
+      { country:"Japan", type:"E-Visa • 90 Days", time:"⏱ 5-7 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=600&auto=format&fit=crop&q=80" },
+      { country:"South Korea", type:"K-ETA • 2 Years", time:"⏱ 24h", badge:"K-ETA", img:"https://images.unsplash.com/photo-1538485399060-071371457e84?w=600&auto=format&fit=crop&q=80" },
+      { country:"Indonesia", type:"B211A • 60 Days", time:"⏱ 3-4 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&auto=format&fit=crop&q=80" },
+      { country:"Philippines", type:"E-Visa • 59 Days", time:"⏱ 3 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1518684079-3c830dcef090?w=600&auto=format&fit=crop&q=80" },
+      { country:"Laos", type:"E-Visa • 30 Days", time:"⏱ 3 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1548013146-72479768bada?w=600&auto=format&fit=crop&q=80" },
+      { country:"Myanmar", type:"E-Visa • 28 Days", time:"⏱ 3 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1583491456185-1d6706e224e7?w=600&auto=format&fit=crop&q=80" },
+      { country:"Nepal", type:"On Arrival • 90 Days", time:"⏱ Instant", badge:"On Arrival", img:"https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&auto=format&fit=crop&q=80" },
+      { country:"Bhutan", type:"E-Permit", time:"⏱ 5 Days", badge:"E-Visa", img:"https://images.unsplash.com/photo-1578895101408-1a364e49ee9f?w=600&auto=format&fit=crop&q=80" },
+      { country:"Maldives", type:"Free Visa • 30 Days", time:"⏱ On Arrival", badge:"E-Visa", img:"https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&auto=format&fit=crop&q=80" }
+    ];
+
+    /* ==================== ADS ==================== */
+    function renderPageAds(){
+      const ad1=document.getElementById("staticAd1");
+      const ad2=document.getElementById("staticAd2");
+      if(ad1 && adManager.staticBanners[0]){
+        ad1.src=adManager.staticBanners[0];
+      }
+      if(ad2 && adManager.staticBanners[1]){
+        ad2.src=adManager.staticBanners[1];
+      }
+    }
+
+    /* ==================== VISA CARDS ==================== */
+    function renderVisaCards(){
+      const grid=document.getElementById("visaGrid");
+      if(!grid)return;
+      let html="";
+      visaData.forEach((visa,index)=>{
+        if(index>0 && index%8===0){
+          const adImg= adManager.gridAds[ (index/8-1)%adManager.gridAds.length ] || adManager.gridAds[0];
+          html+=`
+            <div class="grid-ad-card">
+              <a href="#" onclick="showToast('In-Grid Ad Clicked!');return false;">
+                <img src="${adImg}" alt="Sponsored Ad" class="uniform-ad">
+              </a>
+            </div>
+          `;
+        }
+        html+=`
+          <div class="visa-card" data-name="${visa.country.toLowerCase()}" onclick="handleApplyNow('${visa.country}')">
+            <div class="visa-card-img-wrap">
+              <img src="${visa.img}" alt="${visa.country}" loading="lazy">
+              <span class="visa-badge"> ${visa.badge} </span>
+            </div>
+            <div class="visa-card-body">
+              <div class="visa-country"> ${visa.country} </div>
+              <div class="visa-type"> ${visa.type} </div>
+              <div class="visa-meta">
+                <span class="visa-time"> ${visa.time} </span>
+                <span class="visa-apply"> Apply </span>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      grid.innerHTML=html;
+      const count=document.getElementById("visaCount");
+      if(count){
+        count.textContent=visaData.length+" Countries";
+      }
+    }
+
+    /* ==================== INITIALIZE ==================== */
+    document.addEventListener("DOMContentLoaded",()=>{
+      renderPageAds();
+      renderVisaCards();
+      const btn=document.getElementById("dropdown_btn");
+      const menu=document.getElementById("dropdown_menu");
+      if(btn && menu){
+        btn.addEventListener("click",e=>{
+          e.stopPropagation();
+          menu.classList.toggle("show");
+        });
+        document.addEventListener("click",()=>{
+          menu.classList.remove("show");
+        });
+      }
+
+      /* ---------- POPUP FILE INPUT LISTENER ---------- */
+      const popupFileInput=document.getElementById("popupFileInput");
+      if(popupFileInput){
+        popupFileInput.addEventListener("change",function(){
+          const file=this.files && this.files[0];
+          if(!file)return;
+          console.log("Attached file (popup):",file.name);
+          const input=document.getElementById("aiPopupInput");
+          if(input){
+            input.value="I attached this file: "+file.name;
+            input.focus();
+          }
+          showToast("📎 "+file.name+" attached");
+          this.value="";
+        });
+      }
+    });
+
+    /* ==================== TOAST ==================== */
+    function showToast(msg){
+      let t=document.querySelector(".custom-toast");
+      if(t)t.remove();
+      t=document.createElement("div");
+      t.className="custom-toast";
+      t.textContent=msg;
+      document.body.appendChild(t);
+      setTimeout(()=>{
+        t.style.opacity="1";
+      },10);
+      setTimeout(()=>{
+        t.style.opacity="0";
+        setTimeout(()=>{
+          t.remove();
+        },300);
+      },2200);
+    }
+
+    /* ==================== VISA SEARCH (FILTER LIVE) ==================== */
+    function filterVisas(){
+      const input=document.getElementById("searchInput");
+      if(!input)return;
+      const q=input.value.toLowerCase().trim();
+      let v=0;
+      document.querySelectorAll(".visa-card").forEach(card=>{
+        const name=card.getAttribute("data-name");
+        if(!q || name.includes(q)){
+          card.style.display="flex";
+          v++;
+        }else{
+          card.style.display="none";
+        }
+      });
+      const count=document.getElementById("visaCount");
+      if(count){
+        count.textContent=q?(v+" Countries Found"):(visaData.length+" Countries");
+      }
+    }
+
+    /* ==================== APPLY (REDIRECT) ==================== */
+    function handleApplyNow(countryName){
+      showToast("✈️ Redirecting to apply for "+countryName+" visa...");
+      setTimeout(()=>{
+        window.location.href="/apply.html?country="+encodeURIComponent(countryName);
+      },800);
+    }
+
+    /* =========================================================
+       AI POPUP SYSTEM
+       ========================================================= */
+    let recognition=null;
+    let isRecording=false;
+
+    /*
+     * Keep this endpoint unchanged.
+     * Cloudflare Worker should expose:
+     *
+     * POST /api/ai-chat
+     */
+    let aiWorkerEndpoint="/api/ai-chat";
+
+    /* ==================== SPEECH ==================== */
+    function initSpeechRecognition(){
+      if(
+        !("webkitSpeechRecognition" in window) &&
+        !("SpeechRecognition" in window)
+      ){
+        return null;
+      }
+      const SpeechRecognition=
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recog=new SpeechRecognition();
+      recog.continuous=false;
+      recog.interimResults=false;
+      recog.lang="en-US";
+      return recog;
+    }
+
+    /* =========================================================
+       FULLSCREEN POPUP
+       ========================================================= */
+    function aiPopupOpen(initialText){
+      const popup=document.getElementById("aiPopup");
+      const input=document.getElementById("aiPopupInput");
+      if(!popup)return;
+      popup.classList.add("show");
+      document.body.style.overflow="hidden";
+      if(initialText){
+        input.value=initialText;
+      }
+      /*
+       * Give browser time to paint fullscreen popup
+       * before focusing input.
+       */
+      setTimeout(()=>{
+        if(input){
+          input.focus();
+          requestAnimationFrame(()=>{
+            keepChatAtBottom();
+            updateChatViewport();
+          });
+        }
+      },300);
+    }
+
+    /* ==================== CLOSE ==================== */
+    function aiPopupClose(){
+      const popup=document.getElementById("aiPopup");
+      if(!popup)return;
+      popup.classList.remove("show");
+      document.body.style.overflow="";
+      if(recognition && isRecording){
+        try{
+          recognition.stop();
+        }catch(e){}
+        isRecording=false;
+        const heroBtn=document.getElementById("heroVoiceBtn");
+        const popupBtn=document.getElementById("popupVoiceBtn");
+        if(heroBtn){
+          heroBtn.classList.remove("recording");
+        }
+        if(popupBtn){
+          popupBtn.classList.remove("recording");
+        }
+      }
+      /*
+       * Restore fullscreen dimensions after keyboard closes.
+       */
+      setTimeout(()=>{
+        resetChatViewport();
+      },100);
+    }
+
+    /* ==================== OUTSIDE CLICK ==================== */
+    document.getElementById("aiPopup").addEventListener(
+      "click",
+      function(e){
+        if(e.target===this){
+          aiPopupClose();
+        }
+      }
+    );
+
+    /* ==================== HERO SUBMIT ==================== */
+    function aiHeroSubmit(){
+      const input=document.getElementById("searchInput");
+      if(!input)return;
+      const val=input.value.trim();
+      if(!val){
+        showToast("⚠️ Please enter a search term or question!");
+        return;
+      }
+      aiPopupOpen(val);
+      input.value="";
+      setTimeout(()=>{
+        aiSendMessage(val);
+      },400);
+    }
+
+    /* ==================== POPUP SEND ==================== */
+    function aiPopupSend(){
+      const input=document.getElementById("aiPopupInput");
+      if(!input)return;
+      const val=input.value.trim();
+      if(!val)return;
+      input.value="";
+      aiSendMessage(val);
+    }
+
+    /* ==================== SCROLL ==================== */
+    function keepChatAtBottom(){
+      const messages=document.getElementById("aiMessages");
+      if(!messages)return;
+      requestAnimationFrame(()=>{
+        messages.scrollTop=messages.scrollHeight;
+      });
+    }
+
+    /* =========================================================
+       MOBILE KEYBOARD VIEWPORT FIX
+       Android Chrome / iPhone Safari
+       ========================================================= */
+    function updateChatViewport(){
+      const popup=document.getElementById("aiPopup");
+      const box=document.getElementById("aiPopupBox");
+      if(!popup || !box)return;
+      if(!window.visualViewport){
+        popup.style.height="100dvh";
+        box.style.height="100dvh";
+        return;
+      }
+      const vv=window.visualViewport;
+      /*
+       * visualViewport gives the visible area after
+       * the mobile keyboard opens.
+       */
+      const height=vv.height;
+      const offsetTop=vv.offsetTop;
+      popup.style.height=height+"px";
+      popup.style.minHeight=height+"px";
+      box.style.height=height+"px";
+      box.style.minHeight=height+"px";
+      /*
+       * Handles browser viewport movement on iOS.
+       */
+      popup.style.top=offsetTop+"px";
+      keepChatAtBottom();
+    }
+
+    function resetChatViewport(){
+      const popup=document.getElementById("aiPopup");
+      const box=document.getElementById("aiPopupBox");
+      if(!popup || !box)return;
+      popup.style.height="100dvh";
+      popup.style.minHeight="100dvh";
+      popup.style.top="0px";
+      box.style.height="100dvh";
+      box.style.minHeight="100dvh";
+    }
+
+    /* ==================== VIEWPORT EVENTS ==================== */
+    if(window.visualViewport){
+      window.visualViewport.addEventListener(
+        "resize",
+        ()=>{
+          if(
+            document.getElementById("aiPopup") &&
+            document.getElementById("aiPopup").classList.contains("show")
+          ){
+            updateChatViewport();
+          }
+        }
+      );
+      window.visualViewport.addEventListener(
+        "scroll",
+        ()=>{
+          if(
+            document.getElementById("aiPopup") &&
+            document.getElementById("aiPopup").classList.contains("show")
+          ){
+            updateChatViewport();
+          }
+        }
+      );
+    }
+
+    /* ==================== INPUT FOCUS ==================== */
+    document.addEventListener("focusin",e=>{
+      if(e.target && e.target.id==="aiPopupInput"){
+        setTimeout(()=>{
+          updateChatViewport();
+          keepChatAtBottom();
+        },150);
+        setTimeout(()=>{
+          updateChatViewport();
+          keepChatAtBottom();
+        },400);
+      }
+    });
+
+    /* ==================== AI SEND ==================== */
+    function aiSendMessage(text){
+      const messagesEl=document.getElementById("aiMessages");
+      if(!messagesEl)return;
+
+      /* USER MESSAGE */
+      const userDiv=document.createElement("div");
+      userDiv.className="ai-msg user";
+      userDiv.textContent=text;
+      messagesEl.appendChild(userDiv);
+
+      /* LOADING */
+      const loadingDiv=document.createElement("div");
+      loadingDiv.className="ai-msg bot loading";
+      loadingDiv.innerHTML=
+        "<span></span><span></span><span></span>";
+      messagesEl.appendChild(loadingDiv);
+      keepChatAtBottom();
+
+      /* VISA MATCH */
+      const lowerText=text.toLowerCase();
+      let visaMatch=null;
+      for(const v of visaData){
+        if(
+          lowerText.includes(
+            v.country.toLowerCase().split(" / ")[0]
+          ) ||
+          lowerText.includes(v.country.toLowerCase())
+        ){
+          visaMatch=v;
+          break;
+        }
+      }
+
+      /* ==================== WORKERS AI REQUEST ==================== */
+      fetch(aiWorkerEndpoint,{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          message:text,
+          context: visaMatch ? {visa:visaMatch} : null,
+          source:"hero-ai-search"
+        })
+      })
+      .then(res=>{
+        if(!res.ok){
+          throw new Error("AI Worker unavailable");
+        }
+        return res.json();
+      })
+      .then(data=>{
+        loadingDiv.remove();
+        const botDiv=document.createElement("div");
+        botDiv.className="ai-msg bot";
+        let responseText=
+          data.reply || data.response || data.message ||
+          "I'm sorry, I couldn't process that request.";
+
+        /*
+         * Existing visa card behavior preserved.
+         */
+        if(visaMatch && !data.visaCard){
+          responseText+=
+            "\n\nHere's what I found about "+
+            visaMatch.country+":";
+          botDiv.innerHTML=
+            responseText.replace(/\n/g,"<br>");
+          const cardDiv=document.createElement("a");
+          cardDiv.className="ai-visa-card";
+          cardDiv.href="#";
+          cardDiv.onclick=(e)=>{
+            e.preventDefault();
+            aiPopupClose();
+            handleApplyNow(visaMatch.country);
+          };
+          cardDiv.innerHTML=`
+            <img src="${visaMatch.img}" alt="${visaMatch.country}" loading="lazy">
+            <div>
+              <div class="vname"> ${visaMatch.country} </div>
+              <div class="vtype"> ${visaMatch.type} • ${visaMatch.time} </div>
+            </div>
+          `;
+          botDiv.appendChild(cardDiv);
+        }else{
+          botDiv.innerHTML=
+            responseText.replace(/\n/g,"<br>");
+        }
+        messagesEl.appendChild(botDiv);
+        keepChatAtBottom();
+      })
+      .catch(err=>{
+        console.error("AI Worker error:",err);
+        loadingDiv.remove();
+        const botDiv=document.createElement("div");
+        botDiv.className="ai-msg bot";
+
+        /*
+         * Existing offline fallback preserved.
+         */
+        if(visaMatch){
+          botDiv.innerHTML=`
+            I found information about <strong>${visaMatch.country}</strong>:<br><br>
+            📋 <strong>Type:</strong> ${visaMatch.type}<br>
+            ⏱ <strong>Processing:</strong> ${visaMatch.time}<br>
+            🏷 <strong>Category:</strong> ${visaMatch.badge}<br><br>
+            Would you like me to help you apply for this visa?
+          `;
+          const cardDiv=document.createElement("a");
+          cardDiv.className="ai-visa-card";
+          cardDiv.href="#";
+          cardDiv.onclick=(e)=>{
+            e.preventDefault();
+            aiPopupClose();
+            handleApplyNow(visaMatch.country);
+          };
+          cardDiv.innerHTML=`
+            <img src="${visaMatch.img}" alt="${visaMatch.country}" loading="lazy">
+            <div>
+              <div class="vname"> ${visaMatch.country} </div>
+              <div class="vtype"> ${visaMatch.type} • ${visaMatch.time} </div>
+            </div>
+          `;
+          botDiv.appendChild(cardDiv);
+        }else{
+          botDiv.innerHTML=
+            "I'm currently operating in offline mode. For specific visa inquiries, please try searching for a country name like \"Dubai\", \"Turkey\", or \"Japan\". You can also contact us directly through the menu.";
+        }
+        messagesEl.appendChild(botDiv);
+        keepChatAtBottom();
+      });
+    }
+
+    /* =========================================================
+       HERO VOICE
+       ========================================================= */
+    function aiHeroVoice(){
+      if(
+        !("webkitSpeechRecognition" in window) &&
+        !("SpeechRecognition" in window)
+      ){
+        showToast(
+          "⚠️ Voice input not supported in this browser."
+        );
+        return;
+      }
+      const voiceBtn=
+        document.getElementById("heroVoiceBtn");
+      if(isRecording){
+        recognition.stop();
+        return;
+      }
+      recognition=initSpeechRecognition();
+      if(!recognition)return;
+      recognition.onstart=function(){
+        isRecording=true;
+        voiceBtn.classList.add("recording");
+      };
+      recognition.onresult=function(event){
+        const transcript=
+          event.results[0][0].transcript;
+        isRecording=false;
+        voiceBtn.classList.remove("recording");
+        aiPopupOpen(transcript);
+        setTimeout(()=>{
+          aiSendMessage(transcript);
+        },400);
+      };
+      recognition.onerror=function(event){
+        isRecording=false;
+        voiceBtn.classList.remove("recording");
+        if(event.error==="not-allowed"){
+          showToast(
+            "⚠️ Microphone permission denied."
+          );
+        }else{
+          showToast(
+            "⚠️ Voice input error. Please try again."
+          );
+        }
+      };
+      recognition.onend=function(){
+        isRecording=false;
+        voiceBtn.classList.remove("recording");
+      };
+      recognition.start();
+    }
+
+    /* =========================================================
+       POPUP VOICE
+       ========================================================= */
+    function aiPopupVoice(){
+      if(
+        !("webkitSpeechRecognition" in window) &&
+        !("SpeechRecognition" in window)
+      ){
+        showToast(
+          "⚠️ Voice input not supported in this browser."
+        );
+        return;
+      }
+      const voiceBtn=
+        document.getElementById("popupVoiceBtn");
+      if(isRecording){
+        recognition.stop();
+        return;
+      }
+      recognition=initSpeechRecognition();
+      if(!recognition)return;
+      recognition.onstart=function(){
+        isRecording=true;
+        voiceBtn.classList.add("recording");
+      };
+      recognition.onresult=function(event){
+        const transcript=
+          event.results[0][0].transcript;
+        isRecording=false;
+        voiceBtn.classList.remove("recording");
+        const input=
+          document.getElementById("aiPopupInput");
+        input.value=transcript;
+        aiSendMessage(transcript);
+      };
+      recognition.onerror=function(event){
+        isRecording=false;
+        voiceBtn.classList.remove("recording");
+        if(event.error==="not-allowed"){
+          showToast(
+            "⚠️ Microphone permission denied."
+          );
+        }else{
+          showToast(
+            "⚠️ Voice input error. Please try again."
+          );
+        }
+      };
+      recognition.onend=function(){
+        isRecording=false;
+        voiceBtn.classList.remove("recording");
+      };
+      recognition.start();
+    }
+
+    /* =========================================================
+       ATTACH FILE (POPUP)
+       ========================================================= */
+    function aiAttachFile(){
+      const fileInput=document.getElementById("popupFileInput");
+      if(fileInput){
+        fileInput.click();
+      }else{
+        showToast("⚠️ File picker not available.");
+      }
+    }
+  </script>
 </body>
 </html>`;
 
