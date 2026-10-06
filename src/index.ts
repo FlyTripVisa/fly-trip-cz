@@ -61,20 +61,6 @@ export default {
 			--radius: 20px;
 		}
 
-		body.dark {
-			--bg: #000000;
-			--surface: #080808;
-			--surface-2: #111111;
-
-			--text: #f5f5f5;
-			--muted: #8a8a8a;
-
-			--border: #202020;
-
-			--shadow:
-				0 12px 40px rgba(0, 0, 0, .65);
-		}
-
 		html {
 			scroll-behavior: smooth;
 			background: #000000;
@@ -106,6 +92,7 @@ export default {
 
 		body::before {
 			content: "";
+
 			position: fixed;
 			inset: 0;
 
@@ -142,6 +129,7 @@ export default {
 
 		/* =========================================================
 		   PREMIUM MOBILE HEADER
+		   LOGO + SINGLE MENU BUTTON ONLY
 		========================================================= */
 
 		.top-header {
@@ -172,7 +160,9 @@ export default {
 			gap: 12px;
 		}
 
-		/* BRAND */
+		/* =========================================================
+		   BRAND
+		========================================================= */
 
 		.brand {
 			display: flex;
@@ -257,6 +247,7 @@ export default {
 
 		/* =========================================================
 		   HEADER ACTIONS
+		   ONLY ONE MENU BUTTON
 		========================================================= */
 
 		.header-actions {
@@ -295,23 +286,8 @@ export default {
 			transform: scale(.91);
 		}
 
-		.header-profile {
-			background:
-				var(--primary);
-
-			color:
-				#03140c;
-
-			border-color:
-				transparent;
-
-			font-size: 15px;
-			font-weight: 900;
-		}
-
 		/* =========================================================
-		   HEADER NAV DROPDOWN
-		   SIZE OF EXISTING HEADER BUTTONS UNCHANGED
+		   NAV DROPDOWN
 		========================================================= */
 
 		.nav-menu-wrap {
@@ -706,11 +682,6 @@ export default {
 
 			font-size: 11px;
 			font-weight: 850;
-		}
-
-		body.dark .view-all {
-			color:
-				#3de296;
 		}
 
 		/* =========================================================
@@ -1245,13 +1216,14 @@ export default {
 
 	<!-- =========================================================
 	     PREMIUM HEADER
+	     LOGO + SINGLE MENU BUTTON
 	========================================================= -->
 
 	<header class="top-header">
 
 		<div class="container header-inner">
 
-			<a href="#" class="brand">
+			<a href="#home" class="brand">
 
 				<div class="brand-logo">
 					✈
@@ -1273,22 +1245,25 @@ export default {
 
 			<div class="header-actions">
 
-				<!-- NAV DROPDOWN -->
+				<!-- ONLY HEADER BUTTON -->
 
 				<div class="nav-menu-wrap">
 
 					<button
 						class="header-btn"
 						id="navBtn"
+						type="button"
 						aria-label="Navigation menu"
 						aria-expanded="false"
+						aria-controls="navDropdown"
 					>
 						☰
 					</button>
 
-					<div
+					<nav
 						class="nav-dropdown"
 						id="navDropdown"
+						aria-hidden="true"
 					>
 
 						<a href="#home">
@@ -1342,35 +1317,19 @@ export default {
 							About FLYTRIPVISA
 						</a>
 
-					</div>
+					</nav>
 
 				</div>
-
-				<!-- THEME -->
-
-				<button
-					class="header-btn"
-					id="themeBtn"
-					aria-label="Change theme"
-				>
-					☀
-				</button>
-
-				<!-- PROFILE -->
-
-				<button
-					class="header-btn header-profile"
-					id="profileBtn"
-					aria-label="Profile"
-				>
-					♙
-				</button>
 
 			</div>
 
 		</div>
 
 	</header>
+
+	<!-- =========================================================
+	     MAIN
+	========================================================= -->
 
 	<main id="home">
 
@@ -1444,6 +1403,7 @@ export default {
 					<button
 						class="search-button"
 						id="searchBtn"
+						type="button"
 					>
 						⌕
 					</button>
@@ -1750,6 +1710,7 @@ export default {
 						<button
 							class="btn form-submit"
 							id="checkVisa"
+							type="button"
 						>
 							Check Visa →
 						</button>
@@ -1795,6 +1756,7 @@ export default {
 
 					<button
 						class="btn btn-primary"
+						type="button"
 						style="
 						margin-top:13px;
 						width:100%;
@@ -1843,6 +1805,7 @@ export default {
 
 					<button
 						class="btn btn-primary"
+						type="button"
 						style="
 						margin-top:13px;
 						width:100%;
@@ -1891,6 +1854,7 @@ export default {
 
 					<button
 						class="btn btn-primary"
+						type="button"
 						style="
 						margin-top:13px;
 						width:100%;
@@ -1976,7 +1940,7 @@ export default {
 	</footer>
 
 	<!-- =========================================================
-	     FLOATING BOTTOM APP NAVIGATION
+	     FLOATING BOTTOM NAVIGATION
 	========================================================= -->
 
 	<div class="bottom-wrap">
@@ -2051,7 +2015,9 @@ export default {
 
 	</div>
 
-	<!-- TOAST -->
+	<!-- =========================================================
+	     TOAST
+	========================================================= -->
 
 	<div
 		class="toast"
@@ -2059,154 +2025,6 @@ export default {
 	></div>
 
 	<script>
-
-		/* =========================================================
-		   DYNAMIC BLACK THEME
-		========================================================= */
-
-		const themeBtn =
-			document.getElementById("themeBtn");
-
-		/*
-		 * Black is the default theme.
-		 * Keep the user's preference if one exists.
-		 */
-
-		const savedTheme =
-			localStorage.getItem(
-				"flytripvisa-theme"
-			);
-
-		document.body.classList.add("dark");
-
-		if (savedTheme === "light") {
-			/*
-			 * Even light mode remains black-based.
-			 * This keeps the entire portal visually dark.
-			 */
-			document.body.classList.remove("dark");
-		}
-
-		themeBtn.textContent =
-			document.body.classList.contains("dark")
-				? "☀"
-				: "☾";
-
-		themeBtn.addEventListener(
-			"click",
-			() => {
-
-				document.body.classList.toggle(
-					"dark"
-				);
-
-				const dark =
-					document.body.classList.contains(
-						"dark"
-					);
-
-				localStorage.setItem(
-					"flytripvisa-theme",
-					dark
-						? "dark"
-						: "light"
-				);
-
-				themeBtn.textContent =
-					dark
-						? "☀"
-						: "☾";
-
-			}
-		);
-
-		/* =========================================================
-		   NAV DROPDOWN
-		========================================================= */
-
-		const navBtn =
-			document.getElementById(
-				"navBtn"
-			);
-
-		const navDropdown =
-			document.getElementById(
-				"navDropdown"
-			);
-
-		navBtn.addEventListener(
-			"click",
-			event => {
-
-				event.stopPropagation();
-
-				const opened =
-					navDropdown.classList.toggle(
-						"open"
-					);
-
-				navBtn.setAttribute(
-					"aria-expanded",
-					String(opened)
-				);
-
-			}
-		);
-
-		/*
-		 * Close dropdown when clicking outside.
-		 */
-
-		document.addEventListener(
-			"click",
-			event => {
-
-				if (
-					!navDropdown.contains(
-						event.target
-					) &&
-					event.target !== navBtn
-				) {
-
-					navDropdown.classList.remove(
-						"open"
-					);
-
-					navBtn.setAttribute(
-						"aria-expanded",
-						"false"
-					);
-
-				}
-
-			}
-		);
-
-		/*
-		 * Close dropdown after selecting a menu item.
-		 */
-
-		navDropdown
-			.querySelectorAll("a")
-			.forEach(link => {
-
-				link.addEventListener(
-					"click",
-					() => {
-
-						navDropdown.classList.remove(
-							"open"
-						);
-
-						navBtn.setAttribute(
-							"aria-expanded",
-							"false"
-						);
-
-					}
-				);
-
-			});
 
 		/* =========================================================
 		   TOAST
@@ -2240,21 +2058,133 @@ export default {
 		}
 
 		/* =========================================================
-		   PROFILE
+		   NAV DROPDOWN
+		   SINGLE HEADER MENU BUTTON
 		========================================================= */
 
-		document
-			.getElementById("profileBtn")
-			.addEventListener(
-				"click",
-				() => {
+		const navBtn =
+			document.getElementById(
+				"navBtn"
+			);
 
-					showToast(
-						"Login & profile coming soon"
+		const navDropdown =
+			document.getElementById(
+				"navDropdown"
+			);
+
+		navBtn.addEventListener(
+			"click",
+			event => {
+
+				event.stopPropagation();
+
+				const opened =
+					navDropdown.classList.toggle(
+						"open"
+					);
+
+				navBtn.setAttribute(
+					"aria-expanded",
+					String(opened)
+				);
+
+				navDropdown.setAttribute(
+					"aria-hidden",
+					String(!opened)
+				);
+
+			}
+		);
+
+		/* Close menu outside */
+
+		document.addEventListener(
+			"click",
+			event => {
+
+				if (
+					!navDropdown.contains(
+						event.target
+					) &&
+					event.target !== navBtn
+				) {
+
+					navDropdown.classList.remove(
+						"open"
+					);
+
+					navBtn.setAttribute(
+						"aria-expanded",
+						"false"
+					);
+
+					navDropdown.setAttribute(
+						"aria-hidden",
+						"true"
 					);
 
 				}
-			);
+
+			}
+		);
+
+		/* Close menu after navigation */
+
+		navDropdown
+			.querySelectorAll("a")
+			.forEach(link => {
+
+				link.addEventListener(
+					"click",
+					() => {
+
+						navDropdown.classList.remove(
+							"open"
+						);
+
+						navBtn.setAttribute(
+							"aria-expanded",
+							"false"
+						);
+
+						navDropdown.setAttribute(
+							"aria-hidden",
+							"true"
+						);
+
+					}
+				);
+
+			});
+
+		/* Escape key */
+
+		document.addEventListener(
+			"keydown",
+			event => {
+
+				if (
+					event.key === "Escape"
+				) {
+
+					navDropdown.classList.remove(
+						"open"
+					);
+
+					navBtn.setAttribute(
+						"aria-expanded",
+						"false"
+					);
+
+					navDropdown.setAttribute(
+						"aria-hidden",
+						"true"
+					);
+
+				}
+
+			}
+		);
 
 		/* =========================================================
 		   SEARCH
@@ -2469,7 +2399,7 @@ export default {
 		);
 
 		/* =========================================================
-		   HOME LINK
+		   HOME
 		========================================================= */
 
 		document
